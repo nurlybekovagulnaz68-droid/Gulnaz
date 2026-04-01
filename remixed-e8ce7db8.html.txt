@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Көпжақтар бөлімі — Қорытынды жұмыс парағы</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f3ee;
+  --surface: #fdfcf9;
+  --surface2: #f0ede6;
+  --ink: #1c1915;
+  --ink2: #4a4540;
+  --ink3: #9a8f85;
+  --red: #c0392b;
+  --red-light: #fdf1f0;
+  --red-border: #f0c0bb;
+  --blue: #1a3f6f;
+  --blue-light: #eef3fa;
+  --blue-border: #b8cfea;
+  --green: #1e5c3a;
+  --green-light: #edf7f1;
+  --green-border: #9dd4b5;
+  --gold: #8a6800;
+  --gold-light: #fdf8e8;
+  --gold-border: #e0c860;
+  --purple: #4a1f7a;
+  --purple-light: #f5f0fc;
+  --purple-border: #c4a8e8;
+  --border: #ddd8d0;
+  --border2: #ccc5ba;
+  --shadow: 0 1px 4px rgba(28,25,21,0.07), 0 4px 16px rgba(28,25,21,0.05);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--ink); min-height:100vh; }
+
+.header { background:var(--ink); padding:28px 0 0; }
+.header-inner { max-width:860px; margin:0 auto; padding:0 24px; }
+.header-eyebrow { font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:#888; letter-spacing:.12em; text-transform:uppercase; margin-bottom:10px; }
+.header-title { font-family:'Cormorant Garamond',serif; font-size:2.4rem; font-weight:700; color:#fdfcf9; line-height:1.15; margin-bottom:6px; }
+.header-sub { font-size:0.88rem; color:#888; margin-bottom:24px; }
+.header-nav { display:flex; gap:0; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.nav-item { padding:12px 20px; font-size:0.8rem; font-weight:500; color:#666; cursor:pointer; border-bottom:3px solid transparent; white-space:nowrap; transition:all .2s; background:none; border-top:none; border-left:none; border-right:none; font-family:'DM Sans',sans-serif; letter-spacing:.02em; }
+.nav-item:hover { color:#ccc; }
+.nav-item.active { color:#fdfcf9; border-bottom-color:#fdfcf9; }
+.nav-item .n { font-family:'JetBrains Mono',monospace; font-size:.65rem; margin-right:6px; opacity:.5; }
+
+.progress-bar-wrap { background:var(--surface); border-bottom:1px solid var(--border); }
+.progress-bar-inner { max-width:860px; margin:0 auto; padding:12px 24px; display:flex; align-items:center; gap:16px; }
+.progress-label { font-size:.78rem; color:var(--ink3); white-space:nowrap; }
+.progress-track { flex:1; height:6px; background:var(--border); border-radius:3px; overflow:hidden; }
+.progress-fill { height:100%; background:linear-gradient(90deg,var(--red) 0%,var(--gold) 60%,var(--green) 100%); border-radius:3px; transition:width .6s cubic-bezier(.4,0,.2,1); width:0%; }
+.progress-score { font-family:'JetBrains Mono',monospace; font-size:.78rem; font-weight:500; color:var(--ink2); white-space:nowrap; }
+
+.page { display:none; }
+.page.active { display:block; }
+.page-content { max-width:860px; margin:0 auto; padding:36px 24px 80px; animation:fadeUp .3s ease; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+.task-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; box-shadow:var(--shadow); }
+.task-top { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; border-bottom:1px solid var(--border); gap:12px; flex-wrap:wrap; }
+.task-label { display:flex; align-items:center; gap:12px; }
+.task-num-badge { width:36px; height:36px; border-radius:50%; background:var(--ink); color:#fdfcf9; display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:700; flex-shrink:0; }
+.task-title-text { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:600; }
+.task-title-sub { font-size:.75rem; color:var(--ink3); margin-top:1px; }
+.points-tag { font-family:'JetBrains Mono',monospace; font-size:.72rem; padding:5px 12px; border-radius:20px; white-space:nowrap; font-weight:500; }
+
+.t1 .task-num-badge{background:var(--red)} .t1 .points-tag{background:var(--red-light);color:var(--red);border:1px solid var(--red-border)}
+.t2 .task-num-badge{background:var(--blue)} .t2 .points-tag{background:var(--blue-light);color:var(--blue);border:1px solid var(--blue-border)}
+.t3 .task-num-badge{background:var(--green)} .t3 .points-tag{background:var(--green-light);color:var(--green);border:1px solid var(--green-border)}
+.t4 .task-num-badge{background:var(--gold)} .t4 .points-tag{background:var(--gold-light);color:var(--gold);border:1px solid var(--gold-border)}
+.t5 .task-num-badge{background:var(--purple)} .t5 .points-tag{background:var(--purple-light);color:var(--purple);border:1px solid var(--purple-border)}
+
+.task-body { padding:24px; }
+.instruction { font-size:.83rem; color:var(--ink2); background:var(--surface2); border-left:3px solid var(--border2); padding:10px 14px; border-radius:0 6px 6px 0; margin-bottom:20px; font-style:italic; }
+
+/* MATCH */
+.match-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media(max-width:600px){.match-grid{grid-template-columns:1fr}}
+.match-col-head { font-family:'JetBrains Mono',monospace; font-size:.68rem; text-transform:uppercase; letter-spacing:.08em; color:var(--ink3); margin-bottom:8px; }
+.m-item { padding:11px 14px; border:1.5px solid var(--border2); border-radius:7px; margin-bottom:7px; background:var(--surface); font-size:.86rem; cursor:pointer; transition:border-color .15s,background .15s,transform .1s; line-height:1.4; user-select:none; }
+.m-item:hover { border-color:var(--ink2); transform:translateX(2px); }
+.m-item.sel  { border-color:var(--blue); background:var(--blue-light); }
+.m-item.done { border-color:var(--green); background:var(--green-light); cursor:default; }
+.m-item.done:hover { transform:none; }
+.m-item.correct-final { border-color:var(--green); background:var(--green-light); }
+.m-item.wrong-final   { border-color:var(--red); background:var(--red-light); }
+.m-badge { display:inline-block; font-family:'JetBrains Mono',monospace; font-size:.68rem; background:var(--ink); color:#fdfcf9; padding:2px 6px; border-radius:3px; margin-right:7px; }
+
+/* TF */
+.tf-item { display:flex; align-items:flex-start; gap:12px; padding:12px 14px; border:1px solid var(--border); border-radius:8px; margin-bottom:8px; background:var(--surface); }
+.tf-idx { font-family:'JetBrains Mono',monospace; font-size:.72rem; color:var(--ink3); min-width:18px; margin-top:3px; }
+.tf-text { flex:1; font-size:.87rem; line-height:1.5; }
+.tf-btns { display:flex; gap:6px; flex-shrink:0; }
+.tf-btn { padding:5px 16px; border-radius:5px; border:1.5px solid var(--border2); background:var(--surface); font-size:.78rem; font-weight:600; font-family:'JetBrains Mono',monospace; cursor:pointer; transition:all .15s; }
+.tf-btn.sel-d{background:var(--blue);color:#fff;border-color:var(--blue)}
+.tf-btn.sel-b{background:var(--red);color:#fff;border-color:var(--red)}
+.tf-btn.ok{background:var(--green)!important;color:#fff!important;border-color:var(--green)!important}
+.tf-btn.fail{background:var(--red)!important;color:#fff!important;border-color:var(--red)!important}
+.tf-btn.hint{background:#e8f5e9;border-color:var(--green);color:var(--green)}
+
+/* SELECT / INPUT */
+select, input[type=text] { font-family:'DM Sans',sans-serif; font-size:.86rem; color:var(--ink); background:var(--surface); border:1.5px solid var(--border2); border-radius:6px; padding:7px 10px; outline:none; transition:border-color .15s,box-shadow .15s; }
+select:focus, input[type=text]:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(26,63,111,.1); }
+select.ok, input[type=text].ok { border-color:var(--green); background:var(--green-light); }
+select.fail, input[type=text].fail { border-color:var(--red); background:var(--red-light); }
+
+/* CALC TABLE */
+.calc-table { width:100%; border-collapse:collapse; font-size:.86rem; }
+.calc-table th { padding:9px 12px; background:var(--ink); color:#fdfcf9; font-weight:500; text-align:left; font-size:.78rem; font-family:'JetBrains Mono',monospace; }
+.calc-table td { padding:9px 12px; border-bottom:1px solid var(--border); vertical-align:middle; }
+.calc-table tr:last-child td{border-bottom:none}
+.calc-table tr:nth-child(even) td{background:var(--surface2)}
+.step-badge { display:inline-block; font-family:'JetBrains Mono',monospace; font-size:.7rem; background:var(--ink2); color:#fff; padding:2px 7px; border-radius:3px; }
+
+/* MCQ */
+.mcq-block { margin-bottom:18px; }
+.mcq-q { font-size:.9rem; font-weight:500; margin-bottom:9px; }
+.mcq-q .qnum { display:inline-block; font-family:'JetBrains Mono',monospace; font-size:.7rem; background:var(--ink); color:#fff; padding:2px 6px; border-radius:3px; margin-right:8px; }
+.opts { display:flex; flex-wrap:wrap; gap:7px; }
+.opt { padding:7px 14px; border:1.5px solid var(--border2); border-radius:6px; font-size:.84rem; cursor:pointer; background:var(--surface); transition:all .15s; user-select:none; }
+.opt:hover{border-color:var(--ink2);background:var(--surface2)}
+.opt.sel{background:var(--ink);color:#fdfcf9;border-color:var(--ink)}
+.opt.ok{background:var(--green);color:#fff;border-color:var(--green)}
+.opt.fail{background:var(--red);color:#fff;border-color:var(--red)}
+.opt.hint{background:var(--green-light);border-color:var(--green);color:var(--green)}
+
+/* PROB BOX */
+.prob-box { border-radius:8px; padding:14px 18px; margin-bottom:16px; font-size:.88rem; line-height:1.6; }
+.prob-gold   { background:var(--gold-light);   border:1px solid var(--gold-border);   }
+.prob-red    { background:var(--red-light);    border:1px solid var(--red-border);    }
+.prob-blue   { background:var(--blue-light);   border:1px solid var(--blue-border);   }
+.prob-green  { background:var(--green-light);  border:1px solid var(--green-border);  }
+
+/* BUTTONS */
+.btn-row { display:flex; gap:10px; margin-top:22px; flex-wrap:wrap; }
+.btn { font-family:'DM Sans',sans-serif; font-size:.86rem; font-weight:600; padding:10px 24px; border-radius:7px; border:none; cursor:pointer; transition:all .18s; }
+.btn-check{background:var(--ink);color:#fdfcf9}
+.btn-check:hover{background:var(--ink2)}
+.btn-reset{background:transparent;color:var(--ink2);border:1.5px solid var(--border2)}
+.btn-reset:hover{background:var(--surface2)}
+.btn-next{background:var(--green);color:#fff;margin-left:auto}
+.btn-next:hover{opacity:.88}
+.btn-prev{background:transparent;color:var(--ink2);border:1.5px solid var(--border2)}
+
+/* FEEDBACK */
+.feedback { margin-top:14px; padding:12px 16px; border-radius:7px; font-size:.85rem; font-weight:500; display:none; white-space:pre-line; }
+.feedback.show{display:block}
+.fb-ok  {background:var(--green-light);border:1px solid var(--green-border);color:var(--green)}
+.fb-part{background:var(--gold-light);border:1px solid var(--gold-border);color:var(--gold)}
+.fb-fail{background:var(--red-light);border:1px solid var(--red-border);color:var(--red)}
+
+/* DESCRIPTOR */
+.descriptor { margin-top:16px; padding:14px 18px; background:var(--gold-light); border:1px solid var(--gold-border); border-radius:7px; font-size:.82rem; color:var(--ink2); display:none; }
+.descriptor.show{display:block}
+.desc-head { font-family:'JetBrains Mono',monospace; font-size:.67rem; text-transform:uppercase; letter-spacing:.1em; color:var(--gold); margin-bottom:8px; font-weight:500; }
+.descriptor ul{padding-left:16px}
+.descriptor li{margin-bottom:4px;line-height:1.5}
+
+/* SUMMARY */
+.summary-hero{text-align:center;padding:48px 24px 32px}
+.summary-score-big{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:700;line-height:1;margin-bottom:6px}
+.summary-out-of{font-size:.9rem;color:var(--ink3);margin-bottom:16px}
+.summary-grade-tag{display:inline-block;font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;padding:8px 28px;border-radius:8px;margin-bottom:20px}
+.sg5{background:var(--green-light);color:var(--green);border:2px solid var(--green-border)}
+.sg4{background:var(--blue-light);color:var(--blue);border:2px solid var(--blue-border)}
+.sg3{background:var(--gold-light);color:var(--gold);border:2px solid var(--gold-border)}
+.sg2{background:var(--red-light);color:var(--red);border:2px solid var(--red-border)}
+.summary-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.summary-table th{padding:10px 14px;background:var(--ink);color:#fdfcf9;text-align:left;font-size:.78rem;font-weight:500}
+.summary-table td{padding:10px 14px;border-bottom:1px solid var(--border)}
+.summary-table tr:last-child td{border-bottom:none;font-weight:600}
+.mini-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;min-width:80px}
+.mini-fill{height:100%;border-radius:3px;transition:width .6s}
+
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">Геометрия · 11-сынып · Шыныбеков Е.Н.</div>
+    <div class="header-title">Көпжақтар бөлімі</div>
+    <div class="header-sub">Қорытынды жұмыс парағы · 5 тапсырма · 100 балл</div>
+  </div>
+  <div class="header-nav" id="nav"></div>
+</div>
+
+<div class="progress-bar-wrap">
+  <div class="progress-bar-inner">
+    <div class="progress-label">Прогресс</div>
+    <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
+    <div class="progress-score" id="prog-score">0 / 100</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     ТАПСЫРМА 1 — Сәйкестендіру (20 балл)
+════════════════════════════════════════════ -->
+<div class="page active" id="pg-0">
+<div class="page-content">
+<div class="task-card t1">
+  <div class="task-top">
+    <div class="task-label">
+      <div class="task-num-badge">1</div>
+      <div>
+        <div class="task-title-text">Сәйкестендіру</div>
+        <div class="task-title-sub">Ұғымдар мен анықтамалар · 1–4 тараулар</div>
+      </div>
+    </div>
+    <div class="points-tag">20 балл</div>
+  </div>
+  <div class="task-body">
+    <div class="instruction">Сол жақтан бір ұғым таңдаңыз, содан соң оң жақтан оның дұрыс анықтамасын басыңыз. Барлық 10 жұпты сәйкестендіріңіз.</div>
+
+    <div class="match-grid">
+      <div>
+        <div class="match-col-head">Ұғым</div>
+        <div class="m-item" data-g="m1" data-id="L1" onclick="mLeft('L1')"><span class="m-badge">A</span>Геометриялық дененің беті</div>
+        <div class="m-item" data-g="m1" data-id="L2" onclick="mLeft('L2')"><span class="m-badge">Ä</span>Апофема</div>
+        <div class="m-item" data-g="m1" data-id="L3" onclick="mLeft('L3')"><span class="m-badge">B</span>Дұрыс пирамида</div>
+        <div class="m-item" data-g="m1" data-id="L4" onclick="mLeft('L4')"><span class="m-badge">Г</span>Тік призма</div>
+        <div class="m-item" data-g="m1" data-id="L5" onclick="mLeft('L5')"><span class="m-badge">Д</span>Эйлер формуласы</div>
+        <div class="m-item" data-g="m1" data-id="L6" onclick="mLeft('L6')"><span class="m-badge">Е</span>Дөңес көпжақты бұрыш</div>
+        <div class="m-item" data-g="m1" data-id="L7" onclick="mLeft('L7')"><span class="m-badge">Ж</span>Икосаэдр</div>
+        <div class="m-item" data-g="m1" data-id="L8" onclick="mLeft('L8')"><span class="m-badge">З</span>Қиық пирамида</div>
+        <div class="m-item" data-g="m1" data-id="L9" onclick="mLeft('L9')"><span class="m-badge">И</span>Үшжақты бұрыш</div>
+        <div class="m-item" data-g="m1" data-id="L10" onclick="mLeft('L10')"><span class="m-badge">К</span>Дұрыс көпжақтар саны</div>
+      </div>
+      <div>
+        <div class="match-col-head">Анықтама / Сипаттама</div>
+        <div class="m-item" data-g="m1" data-id="R1" onclick="mRight('R1')">Табаны дұрыс көпбұрыш, биіктігі табан орталығына түседі</div>
+        <div class="m-item" data-g="m1" data-id="R2" onclick="mRight('R2')">Бүйір қырлары табан жазықтығына перпендикуляр болатын призма</div>
+        <div class="m-item" data-g="m1" data-id="R3" onclick="mRight('R3')">O нүктесінен тараған үш сәуле бір жазықтықта жатпайды</div>
+        <div class="m-item" data-g="m1" data-id="R4" onclick="mRight('R4')">Геометриялық дененің ішкі нүктелерін шектейтін барлық жақтық беттердің жиыны</div>
+        <div class="m-item" data-g="m1" data-id="R5" onclick="mRight('R5')">б – қ + т = 2</div>
+        <div class="m-item" data-g="m1" data-id="R6" onclick="mRight('R6')">Дұрыс пирамиданың бүйір жағының биіктігі</div>
+        <div class="m-item" data-g="m1" data-id="R7" onclick="mRight('R7')">Пирамиданы табанға параллель жазықтықпен кескенде алынатын дене</div>
+        <div class="m-item" data-g="m1" data-id="R8" onclick="mRight('R8')">Егер көпжақты бұрыш оның әрбір жағы арқылы өтетін жазықтықтың бір жағында орналасса</div>
+        <div class="m-item" data-g="m1" data-id="R9" onclick="mRight('R9')">20 үшбұрышты бетті дұрыс көпжақ</div>
+        <div class="m-item" data-g="m1" data-id="R10" onclick="mRight('R10')">Тек 5</div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkTask1()">Тексеру</button>
+      <button class="btn btn-reset" onclick="resetTask1()">Қайта бастау</button>
+      <button class="btn btn-next" onclick="goPage(1)">Келесі →</button>
+    </div>
+    <div class="feedback" id="fb1"></div>
+    <div class="descriptor" id="desc1">
+      <div class="desc-head">Дескриптор</div>
+      <ul>
+        <li>Геометриялық дененің беті туралы анықтаманы дұрыс жазады</li>
+        <li>Апофема тек дұрыс пирамидада анықталатынын түсінеді</li>
+        <li>Тік және дұрыс призманың айырмашылығын ажырата алады</li>
+        <li>Дөңес көпжақты бұрыштың анықтамасын біледі</li>
+        <li>Эйлер формуласын және дұрыс көпжақтардың санын (5) дұрыс атайды</li>
+        <li>Үшжақты бұрыш пен икосаэдрдің сипаттамасын дұрыс сәйкестендіреді</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     ТАПСЫРМА 2 — Дұрыс / Бұрыс (20 балл)
+════════════════════════════════════════════ -->
+<div class="page" id="pg-1">
+<div class="page-content">
+<div class="task-card t2">
+  <div class="task-top">
+    <div class="task-label">
+      <div class="task-num-badge">2</div>
+      <div>
+        <div class="task-title-text">Дұрыс / Бұрыс</div>
+        <div class="task-title-sub">Барлық 4 тақырып бойынша 10 тұжырым</div>
+      </div>
+    </div>
+    <div class="points-tag">20 балл</div>
+  </div>
+  <div class="task-body">
+    <div class="instruction">«Д» (Дұрыс) немесе «Б» (Бұрыс) деп белгілеңіз. Тексеру батырмасын басқанда дұрыс жауап жасыл түспен белгіленеді.</div>
+    <div id="tf-container"></div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkTask2()">Тексеру</button>
+      <button class="btn btn-reset" onclick="resetTask2()">Қайта бастау</button>
+      <button class="btn btn-prev" onclick="goPage(0)">← Артқа</button>
+      <button class="btn btn-next" onclick="goPage(2)">Келесі →</button>
+    </div>
+    <div class="feedback" id="fb2"></div>
+    <div class="descriptor" id="desc2">
+      <div class="desc-head">Дескриптор</div>
+      <ul>
+        <li>Геометриялық дененің ішкі нүктесі оның бетінде жатпайтынын дұрыс анықтайды</li>
+        <li>Тік призманың бүйір қырлары табанға перпендикуляр болатынын біледі</li>
+        <li>Апофема тек дұрыс пирамидада болатынын дәлелдейді</li>
+        <li>Кубта Эйлер формуласы: 6 – 12 + 8 = 2 екенін тексере алады</li>
+        <li>Додекаэдр мен икосаэдрдің беттерін ажырата алады</li>
+        <li>Пирамиданы табанға параллель кескенде қиық пирамида емес, ұқсас фигура алынатынын түсінеді</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     ТАПСЫРМА 3 — Жіктеу + Эйлер (20 балл)
+════════════════════════════════════════════ -->
+<div class="page" id="pg-2">
+<div class="page-content">
+<div class="task-card t3">
+  <div class="task-top">
+    <div class="task-label">
+      <div class="task-num-badge">3</div>
+      <div>
+        <div class="task-title-text">Жіктеу және Эйлер формуласы</div>
+        <div class="task-title-sub">Геометриялық денелердің қасиеттерін анықтаңыз</div>
+      </div>
+    </div>
+    <div class="points-tag">20 балл</div>
+  </div>
+  <div class="task-body">
+    <div class="instruction">А бөлімі: Әр геометриялық денені дұрыс санатқа жатқызыңыз (10 балл). Б бөлімі: Эйлер формуласын қолданып жетіспеген мәнді табыңыз (10 балл).</div>
+
+    <div class="prob-blue" style="margin-bottom:14px"><strong>А бөлімі</strong></div>
+    <div id="classify-container"></div>
+
+    <hr style="border:none;border-top:1px dashed var(--border2);margin:22px 0">
+
+    <div class="prob-green" style="margin-bottom:14px"><strong>Б бөлімі:</strong> Кестедегі «?» белгісінің орнына дұрыс санды жазыңыз.</div>
+    <table class="calc-table">
+      <tr><th>Геометриялық дене</th><th>Беттер (б)</th><th>Қырлар (қ)</th><th>Төбелер (т)</th><th>Жауап</th></tr>
+      <tr>
+        <td>Бесбұрышты пирамида</td><td>6</td><td>10</td><td><strong>?</strong></td>
+        <td><input type="text" id="eu-1" placeholder="т = ?" style="width:80px"></td>
+      </tr>
+      <tr>
+        <td>Алтыбұрышты призма</td><td><strong>?</strong></td><td>18</td><td>12</td>
+        <td><input type="text" id="eu-2" placeholder="б = ?" style="width:80px"></td>
+      </tr>
+      <tr>
+        <td>Октаэдр</td><td>8</td><td><strong>?</strong></td><td>6</td>
+        <td><input type="text" id="eu-3" placeholder="қ = ?" style="width:80px"></td>
+      </tr>
+      <tr>
+        <td>Куб</td><td><strong>?</strong></td><td>12</td><td>8</td>
+        <td><input type="text" id="eu-4" placeholder="б = ?" style="width:80px"></td>
+      </tr>
+      <tr>
+        <td>Үшбұрышты призма</td><td>5</td><td>9</td><td><strong>?</strong></td>
+        <td><input type="text" id="eu-5" placeholder="т = ?" style="width:80px"></td>
+      </tr>
+    </table>
+
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkTask3()">Тексеру</button>
+      <button class="btn btn-reset" onclick="resetTask3()">Қайта бастау</button>
+      <button class="btn btn-prev" onclick="goPage(1)">← Артқа</button>
+      <button class="btn btn-next" onclick="goPage(3)">Келесі →</button>
+    </div>
+    <div class="feedback" id="fb3"></div>
+    <div class="descriptor" id="desc3">
+      <div class="desc-head">Дескриптор</div>
+      <ul>
+        <li>Призма, пирамида, параллелепипед, дұрыс көпжақтарды ажырата алады</li>
+        <li>Тік және көлбеу призмалардың айырмашылығын дұрыс жіктейді</li>
+        <li>Дөңес және дөңес емес денелерді анықтамаға сүйене отырып ажырата алады</li>
+        <li>Эйлер формуласын (б – қ + т = 2) дұрыс қолданып жетіспеген мәнді табады</li>
+        <li>Пирамида мен призма үшін де формуланы дұрыс пайдаланады</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     ТАПСЫРМА 4 — Есеп шығару (20 балл)
+════════════════════════════════════════════ -->
+<div class="page" id="pg-3">
+<div class="page-content">
+<div class="task-card t4">
+  <div class="task-top">
+    <div class="task-label">
+      <div class="task-num-badge">4</div>
+      <div>
+        <div class="task-title-text">Есеп шығару</div>
+        <div class="task-title-sub">Призма және пирамида аудандары</div>
+      </div>
+    </div>
+    <div class="points-tag">20 балл</div>
+  </div>
+  <div class="task-body">
+    <div class="instruction">Берілген мәліметтер бойынша кезең-кезеңімен есептеңіз. Жауапты санмен жазыңыз.</div>
+
+    <!-- А есебі -->
+    <div class="prob-gold">
+      <strong>А есебі (10 балл).</strong> Дұрыс алтыбұрышты тік призманың табан қыры <strong>a = 4 см</strong>, биіктігі <strong>h = 9 см</strong>. Призманың бүйір бет ауданы мен толық бет ауданын табыңыз.
+    </div>
+    <table class="calc-table" style="margin-bottom:24px">
+      <tr><th>Қадам</th><th>Не табамыз</th><th>Жауабыңыз</th></tr>
+      <tr>
+        <td><span class="step-badge">1</span></td>
+        <td>Табан периметрі P (см)</td>
+        <td><input type="text" id="ca-1" placeholder="P = ?"></td>
+      </tr>
+      <tr>
+        <td><span class="step-badge">2</span></td>
+        <td>Бүйір бет ауданы S<sub>бүй</sub> (см²)</td>
+        <td><input type="text" id="ca-2" placeholder="S = ?"></td>
+      </tr>
+      <tr>
+        <td><span class="step-badge">3</span></td>
+        <td>Бір табанның ауданы S<sub>таб</sub> (см²)</td>
+        <td><input type="text" id="ca-3" placeholder="≈ ?"></td>
+      </tr>
+      <tr>
+        <td><span class="step-badge">4</span></td>
+        <td>Толық бет ауданы S<sub>тол</sub> (см²)</td>
+        <td><input type="text" id="ca-4" placeholder="≈ ?"></td>
+      </tr>
+    </table>
+
+    <!-- Б есебі -->
+    <div class="prob-red">
+      <strong>Б есебі (10 балл).</strong> Дұрыс төртбұрышты пирамиданың табан қыры <strong>a = 8 см</strong>, биіктігі <strong>h = 3 см</strong>. Пирамиданың бүйір бет ауданы мен толық бет ауданын табыңыз.
+    </div>
+    <table class="calc-table">
+      <tr><th>Қадам</th><th>Не табамыз</th><th>Жауабыңыз</th></tr>
+      <tr>
+        <td><span class="step-badge">1</span></td>
+        <td>Апофема l (см)</td>
+        <td><input type="text" id="cb-1" placeholder="l = ?"></td>
+      </tr>
+      <tr>
+        <td><span class="step-badge">2</span></td>
+        <td>Табан периметрі P (см)</td>
+        <td><input type="text" id="cb-2" placeholder="P = ?"></td>
+      </tr>
+      <tr>
+        <td><span class="step-badge">3</span></td>
+        <td>Бүйір бет ауданы S<sub>бүй</sub> (см²)</td>
+        <td><input type="text" id="cb-3" placeholder="S = ?"></td>
+      </tr>
+      <tr>
+        <td><span class="step-badge">4</span></td>
+        <td>Табан ауданы S<sub>таб</sub> (см²)</td>
+        <td><input type="text" id="cb-4" placeholder="S = ?"></td>
+      </tr>
+      <tr>
+        <td><span class="step-badge">5</span></td>
+        <td>Толық бет ауданы S<sub>тол</sub> (см²)</td>
+        <td><input type="text" id="cb-5" placeholder="S = ?"></td>
+      </tr>
+    </table>
+
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkTask4()">Тексеру</button>
+      <button class="btn btn-reset" onclick="resetTask4()">Қайта бастау</button>
+      <button class="btn btn-prev" onclick="goPage(2)">← Артқа</button>
+      <button class="btn btn-next" onclick="goPage(4)">Келесі →</button>
+    </div>
+    <div class="feedback" id="fb4"></div>
+    <div class="descriptor" id="desc4">
+      <div class="desc-head">Дескриптор</div>
+      <ul>
+        <li>Дұрыс алтыбұрыштың периметрін дұрыс есептейді (P = 6a)</li>
+        <li>Тік призманың бүйір бет ауданын дұрыс табады (S<sub>бүй</sub> = h · P)</li>
+        <li>Дұрыс алтыбұрыштың ауданын дұрыс есептейді</li>
+        <li>Дұрыс пирамиданың апофемасын Пифагор теоремасы арқылы табады</li>
+        <li>Пирамиданың бүйір бет ауданын дұрыс формуламен есептейді (S<sub>бүй</sub> = ½ · l · P)</li>
+        <li>Толық бет ауданын бүйір бет пен табан аудандарынан дұрыс есептейді</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     ТАПСЫРМА 5 — Тест (20 балл)
+════════════════════════════════════════════ -->
+<div class="page" id="pg-4">
+<div class="page-content">
+<div class="task-card t5">
+  <div class="task-top">
+    <div class="task-label">
+      <div class="task-num-badge">5</div>
+      <div>
+        <div class="task-title-text">Тест сұрақтары</div>
+        <div class="task-title-sub">Қималар · Дұрыс көпжақтар · Бөлім бойынша жалпы</div>
+      </div>
+    </div>
+    <div class="points-tag">20 балл</div>
+  </div>
+  <div class="task-body">
+    <div class="instruction">Әр сұраққа дұрыс жауапты таңдаңыз. Бір сұрақ — 2 балл.</div>
+    <div id="mcq-container"></div>
+    <div class="btn-row">
+      <button class="btn btn-check" onclick="checkTask5()">Тексеру</button>
+      <button class="btn btn-reset" onclick="resetTask5()">Қайта бастау</button>
+      <button class="btn btn-prev" onclick="goPage(3)">← Артқа</button>
+      <button class="btn btn-next" onclick="goPage(5)">Қорытынды →</button>
+    </div>
+    <div class="feedback" id="fb5"></div>
+    <div class="descriptor" id="desc5">
+      <div class="desc-head">Дескриптор</div>
+      <ul>
+        <li>Кесуші жазықтықтың бағытына байланысты қима пішінін дұрыс анықтайды</li>
+        <li>Пирамиданы табанға параллель кескенде қима табанмен ұқсас болатынын біледі</li>
+        <li>Дұрыс көпжақтардың (Платон денелері) бет санын, пішінін дұрыс атайды</li>
+        <li>Тетраэдр, куб, октаэдр, додекаэдр, икосаэдрды ажырата алады</li>
+        <li>Пирамида мен призма элементтерін (апофема, бүйір бет, биіктік) дұрыс анықтайды</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     ҚОРЫТЫНДЫ
+════════════════════════════════════════════ -->
+<div class="page" id="pg-5">
+<div class="page-content">
+<div class="task-card" style="overflow:visible">
+  <div class="summary-hero" id="summary-hero"></div>
+  <div style="padding:0 24px 32px">
+    <table class="summary-table" id="summary-table"></table>
+    <div class="btn-row" style="justify-content:center;margin-top:24px">
+      <button class="btn btn-reset" onclick="goPage(0)">Басына оралу</button>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+// ─── SCORES ───
+const taskScores={1:0,2:0,3:0,4:0,5:0};
+function setScore(t,pts){
+  taskScores[t]=pts;
+  const total=Object.values(taskScores).reduce((a,b)=>a+b,0);
+  document.getElementById('prog-score').textContent=`${total} / 100`;
+  document.getElementById('prog-fill').style.width=total+'%';
+}
+
+// ─── NAV ───
+const pageNames=['1-тапсырма','2-тапсырма','3-тапсырма','4-тапсырма','5-тапсырма','Қорытынды'];
+function buildNav(){
+  const nav=document.getElementById('nav');
+  pageNames.forEach((n,i)=>{
+    const b=document.createElement('button');
+    b.className='nav-item'+(i===0?' active':'');
+    b.id='nav-'+i;
+    b.innerHTML=`<span class="n">${i<5?i+1:'★'}</span>${n}`;
+    b.onclick=()=>goPage(i);
+    nav.appendChild(b);
+  });
+}
+function goPage(i){
+  document.querySelectorAll('.page').forEach((p,j)=>p.classList.toggle('active',j===i));
+  document.querySelectorAll('.nav-item').forEach((b,j)=>b.classList.toggle('active',j===i));
+  if(i===5)buildSummary();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ─── HELPERS ───
+function fb(id,msg,type){
+  const el=document.getElementById(id);
+  el.textContent=msg; el.className=`feedback show fb-${type}`;
+}
+function showDesc(id){document.getElementById(id).className='descriptor show';}
+
+// ─── TASK 1: MATCH ───
+const M={sel:null,pairs:{}};
+const matchAns={L1:'R4',L2:'R6',L3:'R1',L4:'R2',L5:'R5',L6:'R8',L7:'R9',L8:'R7',L9:'R3',L10:'R10'};
+
+function mLeft(id){
+  document.querySelectorAll('[data-g="m1"]').forEach(el=>{
+    if(!el.classList.contains('done')) el.classList.remove('sel');
+  });
+  M.sel=id;
+  const el=document.querySelector(`[data-id="${id}"]`);
+  if(el&&!el.classList.contains('done')) el.classList.add('sel');
+}
+function mRight(id){
+  if(!M.sel) return;
+  const left=document.querySelector(`[data-id="${M.sel}"]`);
+  const right=document.querySelector(`[data-id="${id}"]`);
+  if(!left||!right) return;
+  M.pairs[M.sel]=id;
+  left.classList.remove('sel'); left.classList.add('done');
+  right.classList.add('done');
+  M.sel=null;
+}
+function checkTask1(){
+  let correct=0;
+  for(let L in matchAns){
+    const lEl=document.querySelector(`[data-id="${L}"]`);
+    const rEl=document.querySelector(`[data-id="${M.pairs[L]}"]`);
+    const correctR=document.querySelector(`[data-id="${matchAns[L]}"]`);
+    if(M.pairs[L]===matchAns[L]){
+      correct++;
+      if(lEl) lEl.classList.add('correct-final');
+      if(rEl) rEl.classList.add('correct-final');
+    } else {
+      if(lEl){lEl.classList.remove('done');lEl.classList.add('wrong-final');}
+      if(rEl){rEl.classList.remove('done');rEl.classList.add('wrong-final');}
+      if(correctR) correctR.style.outline='2px dashed var(--green)';
+    }
+  }
+  const pts=correct*2;
+  setScore(1,pts);
+  fb('fb1',`${correct}/10 дұрыс сәйкестік. Балл: ${pts}/20`,correct===10?'ok':correct>=5?'part':'fail');
+  showDesc('desc1');
+}
+function resetTask1(){
+  M.sel=null; M.pairs={};
+  document.querySelectorAll('[data-g="m1"]').forEach(el=>{
+    el.className=el.className.replace(/\s*(sel|done|correct-final|wrong-final)/g,'');
+    el.style.outline='';
+  });
+  document.getElementById('fb1').className='feedback';
+  document.getElementById('desc1').className='descriptor';
+}
+
+// ─── TASK 2: TRUE/FALSE ───
+const tfData=[
+  {t:'Геометриялық дененің ішкі нүктесі деп оны шектейтін бетте жататын нүктені айтады.',ans:'b'},
+  {t:'Тік призмада бүйір қырлар табан жазықтығына перпендикуляр болады.',ans:'d'},
+  {t:'Кез келген пирамиданың апофемасы болады.',ans:'b'},
+  {t:'Дұрыс үшбұрышты пирамиданың 3 бүйір жағы бар.',ans:'d'},
+  {t:'Тетраэдр — бұл 4 бүйір жағы бар пирамида.',ans:'b'},
+  {t:'Кубта Эйлер формуласы бойынша б – қ + т = 6 – 12 + 8 = 2.',ans:'d'},
+  {t:'Додекаэдрдің беттері — тең бүйірлі үшбұрыштар.',ans:'b'},
+  {t:'Дұрыс көпжақтар тек 5 түрлі болады.',ans:'d'},
+  {t:'Пирамиданы табанға параллель жазықтықпен кескенде алынған қима — қиық пирамида.',ans:'b'},
+  {t:'Дөңес денеде кез келген жақ арқылы өтетін жазықтық денені бір жағында ұстайды.',ans:'d'},
+];
+const tfSel={};
+function renderTF(){
+  const c=document.getElementById('tf-container');
+  let h='';
+  tfData.forEach((item,i)=>{
+    tfSel[i]=null;
+    h+=`<div class="tf-item">
+      <div class="tf-idx">${i+1}</div>
+      <div class="tf-text">${item.t}</div>
+      <div class="tf-btns">
+        <button class="tf-btn" id="tfD-${i}" onclick="selTF(${i},'d')">Д</button>
+        <button class="tf-btn" id="tfB-${i}" onclick="selTF(${i},'b')">Б</button>
+      </div>
+    </div>`;
+  });
+  c.innerHTML=h;
+}
+function selTF(i,v){
+  tfSel[i]=v;
+  document.getElementById(`tfD-${i}`).className='tf-btn'+(v==='d'?' sel-d':'');
+  document.getElementById(`tfB-${i}`).className='tf-btn'+(v==='b'?' sel-b':'');
+}
+function checkTask2(){
+  let correct=0;
+  tfData.forEach((item,i)=>{
+    const dB=document.getElementById(`tfD-${i}`);
+    const bB=document.getElementById(`tfB-${i}`);
+    dB.className='tf-btn'; bB.className='tf-btn';
+    if(tfSel[i]===item.ans){
+      correct++;
+      (item.ans==='d'?dB:bB).className='tf-btn ok';
+    } else {
+      if(tfSel[i]) (tfSel[i]==='d'?dB:bB).className='tf-btn fail';
+      (item.ans==='d'?dB:bB).classList.add('hint');
+    }
+  });
+  const pts=correct*2;
+  setScore(2,pts);
+  fb('fb2',`${correct}/10 дұрыс. Балл: ${pts}/20`,correct===10?'ok':correct>=5?'part':'fail');
+  showDesc('desc2');
+}
+function resetTask2(){renderTF();document.getElementById('fb2').className='feedback';document.getElementById('desc2').className='descriptor';}
+
+// ─── TASK 3: CLASSIFY + EULER ───
+const classifyData=[
+  {name:'Дұрыс үшбұрышты тік призма',   cat:'Дұрыс призма'},
+  {name:'Тікбұрышты параллелепипед',     cat:'Параллелепипед'},
+  {name:'Жұлдыз пішінді пирамида',       cat:'Дөңес емес дене'},
+  {name:'Куб',                            cat:'Дұрыс призма'},
+  {name:'Дұрыс тетраэдр',               cat:'Дұрыс көпжақ'},
+  {name:'Үшбұрышты көлбеу призма',      cat:'Көлбеу призма'},
+  {name:'Икосаэдр',                      cat:'Дұрыс көпжақ'},
+  {name:'Ромб табанды параллелепипед',   cat:'Параллелепипед'},
+  {name:'Дұрыс бесбұрышты пирамида',    cat:'Дұрыс пирамида'},
+  {name:'Ойыс беті бар дене',           cat:'Дөңес емес дене'},
+];
+const cats=['Дұрыс призма','Дұрыс пирамида','Параллелепипед','Көлбеу призма','Дұрыс көпжақ','Дөңес емес дене'];
+const clSel={};
+function renderClassify(){
+  const c=document.getElementById('classify-container');
+  let h='';
+  classifyData.forEach((item,i)=>{
+    clSel[i]='';
+    h+=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:7px;flex-wrap:wrap">
+      <span style="min-width:260px;font-size:.87rem">${item.name}</span>
+      <select id="cl-${i}" onchange="clSel[${i}]=this.value" style="flex:1;min-width:180px">
+        <option value="">— санатты таңдаңыз —</option>
+        ${cats.map(c=>`<option>${c}</option>`).join('')}
+      </select>
+    </div>`;
+  });
+  c.innerHTML=h;
+}
+const eulerAns={'eu-1':6,'eu-2':8,'eu-3':12,'eu-4':6,'eu-5':6};
+function checkTask3(){
+  let clOk=0;
+  classifyData.forEach((item,i)=>{
+    const sel=document.getElementById(`cl-${i}`);
+    if(!sel) return;
+    if(sel.value===item.cat){clOk++;sel.className='ok';}
+    else sel.className='fail';
+  });
+  let euOk=0;
+  for(let id in eulerAns){
+    const inp=document.getElementById(id);
+    if(!inp) continue;
+    if(parseInt(inp.value)===eulerAns[id]){euOk++;inp.className='ok';}
+    else inp.className='fail';
+  }
+  const pts=Math.round((clOk/10)*10)+Math.round((euOk/5)*10);
+  setScore(3,pts);
+  fb('fb3',`А бөлімі: ${clOk}/10 дұрыс. Б бөлімі: ${euOk}/5 дұрыс.\nБалл: ${pts}/20\nДұрыс жауаптар (Б): т=6, б=8, қ=12, б=6, т=6`,
+    pts>=18?'ok':pts>=10?'part':'fail');
+  showDesc('desc3');
+}
+function resetTask3(){
+  renderClassify();
+  for(let id in eulerAns){const el=document.getElementById(id);if(el){el.value='';el.className='';}}
+  document.getElementById('fb3').className='feedback';
+  document.getElementById('desc3').className='descriptor';
+}
+
+// ─── TASK 4: CALCULATIONS ───
+// A: hex prism a=4, h=9 → P=24, Sbuy=216, Stab=3√3/2·16≈41.57, Stol≈299.1
+// B: sq pyramid a=8, h=3 → l=√(9+16)=5, P=32, Sbuy=80, Stab=64, Stol=144
+const stab_hex = 3*Math.sqrt(3)/2*16;
+const task4Ans={
+  'ca-1':{v:24,   tol:0.1},
+  'ca-2':{v:216,  tol:1},
+  'ca-3':{v:stab_hex, tol:1.5},
+  'ca-4':{v:216+2*stab_hex, tol:3},
+  'cb-1':{v:5,    tol:0.1},
+  'cb-2':{v:32,   tol:0.1},
+  'cb-3':{v:80,   tol:1},
+  'cb-4':{v:64,   tol:0.1},
+  'cb-5':{v:144,  tol:1},
+};
+function checkTask4(){
+  let correct=0;
+  const total=Object.keys(task4Ans).length;
+  for(let id in task4Ans){
+    const inp=document.getElementById(id);
+    if(!inp) continue;
+    const v=parseFloat(inp.value);
+    const {v:exp,tol}=task4Ans[id];
+    if(!isNaN(v)&&Math.abs(v-exp)<=tol){correct++;inp.className='ok';}
+    else inp.className='fail';
+  }
+  const pts=Math.round((correct/total)*20);
+  setScore(4,pts);
+  fb('fb4',
+    `${correct}/${total} қадам дұрыс. Балл: ${pts}/20\nА: P=24, S_бүй=216, S_таб≈${stab_hex.toFixed(1)}, S_тол≈${(216+2*stab_hex).toFixed(1)}\nБ: l=5, P=32, S_бүй=80, S_таб=64, S_тол=144`,
+    correct>=total-1?'ok':correct>=Math.floor(total/2)?'part':'fail');
+  showDesc('desc4');
+}
+function resetTask4(){
+  for(let id in task4Ans){const el=document.getElementById(id);if(el){el.value='';el.className='';}}
+  document.getElementById('fb4').className='feedback';
+  document.getElementById('desc4').className='descriptor';
+}
+
+// ─── TASK 5: MCQ ───
+const mcqQ=[
+  {q:'Кубты табанына параллель жазықтықпен кессек, қима пішіні:',
+   opts:['Тікбұрыш','Шаршы','Үшбұрыш','Трапеция'],ans:1},
+  {q:'Кубты үш іргелес төбесінен өткен жазықтықпен кессек, қима пішіні:',
+   opts:['Шаршы','Тікбұрыш','Тең бүйірлі үшбұрыш','Параллелограмм'],ans:2},
+  {q:'Пирамиданы табанға параллель жазықтықпен кессек, қима мен табан:',
+   opts:['Тең','Ұқсас','Конгруэнтті','Параллель ғана'],ans:1},
+  {q:'Дұрыс тетраэдрдің бет пішіні:',
+   opts:['Шаршы','Дұрыс бесбұрыш','Тең бүйірлі үшбұрыш','Тікбұрыш'],ans:2},
+  {q:'Додекаэдрдің беттер саны:',
+   opts:['8','20','12','30'],ans:2},
+  {q:'Дұрыс алтыбұрышты призманы өсіне перпендикуляр жазықтықпен кессек:',
+   opts:['Шаршы','Дұрыс алтыбұрыш','Тікбұрыш','Үшбұрыш'],ans:1},
+  {q:'Дұрыс пирамиданың бүйір жақтары қандай пішінде болады?',
+   opts:['Тікбұрыштар','Параллелограммдар','Тең бүйірлі үшбұрыштар','Трапециялар'],ans:2},
+  {q:'Икосаэдрдің төбелер саны:',
+   opts:['12','20','30','8'],ans:0},
+  {q:'Қиық пирамиданың екі табаны бір-бірімен:',
+   opts:['Тең','Параллель ғана','Ұқсас','Конгруэнтті'],ans:2},
+  {q:'Дұрыс призманың бүйір жақтарының пішіні:',
+   opts:['Параллелограммдар','Тікбұрыштар','Үшбұрыштар','Трапециялар'],ans:1},
+];
+const mcqSel={};
+function renderMCQ(){
+  const c=document.getElementById('mcq-container');
+  let h='';
+  mcqQ.forEach((item,i)=>{
+    mcqSel[i]=null;
+    h+=`<div class="mcq-block">
+      <div class="mcq-q"><span class="qnum">${i+1}</span>${item.q}</div>
+      <div class="opts" id="mopts-${i}">
+        ${item.opts.map((o,j)=>`<div class="opt" id="mopt-${i}-${j}" onclick="selMCQ(${i},${j})">${o}</div>`).join('')}
+      </div>
+    </div>`;
+  });
+  c.innerHTML=h;
+}
+function selMCQ(i,j){
+  mcqSel[i]=j;
+  document.querySelectorAll(`#mopts-${i} .opt`).forEach(el=>el.className='opt');
+  document.getElementById(`mopt-${i}-${j}`).className='opt sel';
+}
+function checkTask5(){
+  let correct=0;
+  mcqQ.forEach((item,i)=>{
+    item.opts.forEach((_,j)=>{
+      const el=document.getElementById(`mopt-${i}-${j}`);
+      if(!el) return;
+      el.className='opt';
+      if(j===item.ans) el.className='opt hint';
+      if(j===mcqSel[i]&&j!==item.ans) el.className='opt fail';
+      if(j===mcqSel[i]&&j===item.ans){el.className='opt ok';correct++;}
+    });
+  });
+  const pts=correct*2;
+  setScore(5,pts);
+  fb('fb5',`${correct}/10 дұрыс. Балл: ${pts}/20`,correct===10?'ok':correct>=5?'part':'fail');
+  showDesc('desc5');
+}
+function resetTask5(){
+  renderMCQ();
+  document.getElementById('fb5').className='feedback';
+  document.getElementById('desc5').className='descriptor';
+}
+
+// ─── SUMMARY ───
+function buildSummary(){
+  const total=Object.values(taskScores).reduce((a,b)=>a+b,0);
+  const grade=total>=90?5:total>=75?4:total>=50?3:2;
+  const gc={5:'sg5',4:'sg4',3:'sg3',2:'sg2'};
+  const msg={5:'Керемет! Бөлімді тамаша меңгердіңіз.',4:'Жақсы нәтиже!',3:'Кейбір тақырыптарды қайталаңыз.',2:'Тақырыптарды қайтадан оқу қажет.'};
+  document.getElementById('summary-hero').innerHTML=`
+    <div class="summary-score-big" style="color:${total>=75?'var(--green)':total>=50?'var(--gold)':'var(--red)'}">${total}</div>
+    <div class="summary-out-of">/ 100 балл</div>
+    <div class="summary-grade-tag ${gc[grade]}">Баға: ${grade}</div>
+    <div style="font-size:.85rem;color:var(--ink3)">${msg[grade]}</div>`;
+  const tNames={1:'Сәйкестендіру',2:'Дұрыс/Бұрыс',3:'Жіктеу+Эйлер',4:'Есеп шығару',5:'Тест'};
+  let rows='<tr><th>Тапсырма</th><th>Балл</th><th>Макс.</th><th>Прогресс</th></tr>';
+  let sp=0,sm=0;
+  for(let t=1;t<=5;t++){
+    const pts=taskScores[t],mx=20;
+    const p2=Math.round((pts/mx)*100);
+    const col=pts>=18?'var(--green)':pts>=10?'var(--gold)':'var(--red)';
+    rows+=`<tr>
+      <td>${t}. ${tNames[t]}</td>
+      <td style="font-weight:600;color:${col}">${pts}</td>
+      <td style="color:var(--ink3)">${mx}</td>
+      <td><div class="mini-bar"><div class="mini-fill" style="width:${p2}%;background:${col}"></div></div></td>
+    </tr>`;
+    sp+=pts; sm+=mx;
+  }
+  const tc=sp>=75?'var(--green)':sp>=50?'var(--gold)':'var(--red)';
+  rows+=`<tr><td>Жалпы</td><td style="color:${tc}">${sp}</td><td>${sm}</td><td></td></tr>`;
+  document.getElementById('summary-table').innerHTML=rows;
+}
+
+// ─── INIT ───
+buildNav();
+renderTF();
+renderClassify();
+renderMCQ();
+</script>
+</body>
+</html>
