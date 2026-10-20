@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How long does the tank take to drain?</title>
+<style>
+:root{--bg:#f3f8fb;--card:#fff;--ink:#12263a;--mute:#5a6f82;--line:#cfdde8;--acc:#0b78b8;--water:#8fd0f0;--hl:#e3f2fb;--ok:#0d7a4f;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1a26;--card:#142636;--ink:#e6f0f7;--mute:#9bb2c4;--line:#27425a;--acc:#5cc2f2;--water:#1d5f86;--hl:#183a52;--ok:#5fd6a0}}
+:root[data-theme="dark"]{--bg:#0d1a26;--card:#142636;--ink:#e6f0f7;--mute:#9bb2c4;--line:#27425a;--acc:#5cc2f2;--water:#1d5f86;--hl:#183a52;--ok:#5fd6a0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:28px 18px 60px}
+h1{font:700 clamp(26px,5vw,38px)/1.2 Georgia,"Times New Roman",serif;margin:0 0 8px}
+h2{font:700 22px/1.3 Georgia,serif;margin:0 0 12px}
+p{margin:0 0 12px}
+.lead{color:var(--mute);font-size:18px}
+section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;margin:20px 0}
+.step{border-left:5px solid var(--acc)}
+.badge{display:inline-block;background:var(--acc);color:var(--bg);font-weight:700;border-radius:20px;padding:1px 12px;margin-right:8px;font-size:15px}
+.tblwrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:480px}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left}
+th{color:var(--mute);font-weight:600}
+.eq{font:italic 22px/1.2 "Cambria Math","STIX Two Text",Georgia,serif;background:var(--hl);border-radius:10px;padding:14px 16px;margin:12px 0;overflow-x:auto;white-space:nowrap}
+.eq .u,.eq .n{font-style:normal}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .2em}
+.fr>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .3em .1em}
+.fr>span:last-child{padding:.1em .3em 0}
+.rt{display:inline-flex;align-items:stretch;white-space:nowrap;vertical-align:middle;font-style:normal}
+.sg{display:flex;align-items:center;padding-right:1px}
+.sg.tall{font-size:2.1em;line-height:1}
+.ov{border-top:1.5px solid currentColor;padding:.05em .15em 0 .1em;font-style:italic}
+.big{font-size:26px}
+.note{color:var(--mute);font-size:15px}
+.ans{background:var(--hl);border:2px solid var(--ok);text-align:center}
+.ans .res{font:700 40px Georgia,serif;color:var(--ok)}
+svg{width:100%;max-width:520px;height:auto;display:block;margin:0 auto}
+svg text{fill:var(--ink);font:italic 17px Georgia,serif}
+.ctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;margin:14px 0 6px}
+.ctl button,.ctl select{font:600 15px system-ui,sans-serif;background:var(--acc);color:var(--bg);border:0;border-radius:8px;padding:8px 16px;cursor:pointer}
+.ctl button.alt,.ctl select{background:var(--hl);color:var(--ink);border:1px solid var(--line)}
+.ctl button:focus-visible,.ctl select:focus-visible,.ctl input:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.ctl input[type=range]{flex:1 1 220px;min-width:160px;accent-color:var(--acc)}
+.read{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:center;font:600 18px Georgia,serif;margin:8px 0}
+#stream{animation:flow .5s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-11}}
+@media (prefers-reduced-motion:reduce){#stream{animation:none}}
+</style>
+</head>
+<body>
+<main>
+<h1>How long does the tank take to drain?</h1>
+<p class="lead">A cylindrical tank with a small hole in its bottom. Water leaves through the hole, and the level falls. We want the time until the tank is empty.</p>
+
+<section>
+<h2>The problem</h2>
+<p>A cylindrical tank has a base diameter of 1.8 m and a height of 2.45 m. The hole in the bottom has a diameter of 6 cm. How long does it take for all the water to flow out?</p>
+<svg viewBox="0 0 520 300" role="img" aria-label="Tank with water level h, thin layer dh, and a hole at the bottom">
+<rect id="wt" x="150" y="60" width="180" height="200" fill="var(--water)" opacity=".6"/>
+<rect x="150" y="60" width="180" height="200" fill="none" stroke="var(--ink)" stroke-width="3"/>
+<rect id="st" x="150" y="60" width="180" height="8" fill="var(--acc)" opacity=".85"/>
+<rect x="228" y="257" width="24" height="6" fill="var(--bg)"/>
+<path id="stream" d="M240 263 v30" stroke="var(--acc)" stroke-width="4" stroke-dasharray="6 5"/>
+<path d="M150 40 h180" stroke="var(--mute)"/><text x="232" y="32">D</text>
+<path id="dhb" d="M350 60 v8 M345 60 h14 M345 68 h14" stroke="var(--ink)"/><text id="dht" x="366" y="68">dh</text>
+<path id="hl" d="M350 68 V260" stroke="var(--ink)"/><path d="M345 260 h14" stroke="var(--ink)"/><text id="ht" x="366" y="170">h</text>
+<text x="262" y="284">r</text>
+</svg>
+<div class="read"><span id="rt">t = 0 s</span><span id="rh">h = 2.45 m</span><span id="rp">water left: 100%</span></div>
+<div class="ctl"><button id="play">Play</button><button id="reset" class="alt">Reset</button><input id="scrub" type="range" min="0" max="1050" step="1" value="0" aria-label="Time in seconds"><select id="spd" aria-label="Animation speed"><option value="35">35× faster</option><option value="70" selected>70× faster</option><option value="140">140× faster</option></select></div>
+<p class="note">Notice that the level drops quickly at first and slowly at the end. The speed <i>v</i> depends on <i>h</i>, so a lower level pushes the water out more weakly. At 70× speed the whole 1050 s plays in 15 s.</p>
+<p class="note">The shaded strip is a very thin layer of water of thickness <i>dh</i>. The level <i>h</i> is the height of water above the hole.</p>
+</section>
+
+<section>
+<h2>What we are given</h2>
+<div class="tblwrap"><table>
+<tr><th>Symbol</th><th>Meaning</th><th>Value</th></tr>
+<tr><td><i>R</i></td><td>radius of the tank (half of 1.8 m)</td><td>0.9 m</td></tr>
+<tr><td><i>r</i></td><td>radius of the hole (half of 6 cm = 0.06 m)</td><td>0.03 m</td></tr>
+<tr><td><i>h</i><sub>0</sub></td><td>starting water height</td><td>2.45 m</td></tr>
+<tr><td><i>g</i></td><td>gravitational acceleration</td><td>10 m/s<sup>2</sup></td></tr>
+<tr><td><i>v</i></td><td>speed of the water leaving the hole</td><td>0.6 <span class="rt">√<span class="ov"><i>2gh</i></span></span></td></tr>
+<tr><td><i>T</i></td><td><b>unknown:</b> time until <i>h</i> = 0</td><td>?</td></tr>
+</table></div>
+</section>
+
+<section class="step">
+<h2><span class="badge">Step 1</span>Write the idea as an equation</h2>
+<p>In a tiny time <i>dt</i>, the water that leaves the tank equals the water that passes through the hole.</p>
+<p><b>Volume lost by the tank.</b> The layer of water that disappears is a thin cylinder. Its base is the whole tank bottom, with area π R<sup>2</sup>, and its thickness is the drop in level, <i>dh</i>. The volume of any cylinder is base area × height:</p>
+<div class="eq">V<sub>tank</sub> = π R<sup>2</sup> · (−dh)</div>
+<p><b>Why is the volume through the hole π r<sup>2</sup> · v · dt?</b> Picture the water that leaves the hole during the short time <i>dt</i> as a thin column, like toothpaste squeezed out of a tube. The base of this column is the hole itself, a circle of radius <i>r</i>, so its area is π r<sup>2</sup>. The length of the column is how far the water travelled: speed × time = <i>v · dt</i>. And again, volume = base area × length, so we get π r<sup>2</sup> · <i>v · dt</i>.</p>
+<div class="eq">V<sub>hole</sub> = π r<sup>2</sup> · v · dt</div>
+<p>The minus sign is there because <i>h</i> decreases, so <i>dh</i> is negative. Setting them equal:</p>
+<div class="eq">π R<sup>2</sup> (−dh) = π r<sup>2</sup> v dt</div>
+</section>
+
+<section class="step">
+<h2><span class="badge">Step 2</span>Cancel π and insert the speed</h2>
+<p>Cancel π and replace <i>v</i> with 0.6 √(2gh):</p>
+<div class="eq">R<sup>2</sup> (−dh) = r<sup>2</sup> · 0.6 <span class="rt">√<span class="ov">2gh</span></span> · dt</div>
+</section>
+
+<section class="step">
+<h2><span class="badge">Step 3</span>Separate the variables</h2>
+<p>Put everything with <i>h</i> on the left and everything with <i>t</i> on the right. Divide both sides by R<sup>2</sup> and by √<i>h</i>:</p>
+<div class="eq"><span class="fr"><span>dh</span><span><span class="rt">√<span class="ov">h</span></span></span></span> = −<span class="fr"><span>r<sup>2</sup></span><span>R<sup>2</sup></span></span> · 0.6 <span class="rt">√<span class="ov">2g</span></span> · dt</div>
+<p class="note">The factor 0.6 √(2g) does not depend on <i>h</i>, so it is just a constant.</p>
+</section>
+
+<section class="step">
+<h2><span class="badge">Step 4</span>Integrate both sides</h2>
+<p>The sign ∫ means “add up all the tiny pieces.” We add them from the start to the end. On the left side <i>h</i> goes from <i>h</i><sub>0</sub> down to 0. On the right side the time <i>t</i> goes from 0 to <i>T</i>. Both sides must cover the same process, so the limits match.</p>
+<div class="eq big">∫<sub>h<sub>0</sub></sub><sup>0</sup> <span class="fr"><span>dh</span><span><span class="rt">√<span class="ov">h</span></span></span></span> = −<span class="fr"><span>r<sup>2</sup></span><span>R<sup>2</sup></span></span> · 0.6 <span class="rt">√<span class="ov">2g</span></span> ∫<sub>0</sub><sup>T</sup> dt</div>
+<p><b>Left side, part 1.</b> Rewrite the root as a power, because powers are easy to integrate:</p>
+<div class="eq"><span class="fr"><span>1</span><span><span class="rt">√<span class="ov">h</span></span></span></span> = h<sup>−½</sup></div>
+<p><b>Left side, part 2.</b> Power rule: to integrate h<sup>n</sup>, raise the power by 1, then divide by the new power. Here n = −½, so the new power is −½ + 1 = ½:</p>
+<div class="eq">∫ h<sup>−½</sup> dh = <span class="fr"><span>h<sup>½</sup></span><span>½</span></span> = 2h<sup>½</sup> = 2<span class="rt">√<span class="ov">h</span></span></div>
+<p class="note">Quick check: differentiate the answer. (2h<sup>½</sup>)′ = 2 · ½ · h<sup>−½</sup> = h<sup>−½</sup>, which is where we started.</p>
+<p><b>Left side, part 3.</b> Insert the limits: take the value at the top limit (0) and subtract the value at the bottom limit (<i>h</i><sub>0</sub>):</p>
+<div class="eq">[ 2<span class="rt">√<span class="ov">h</span></span> ]<sub>h<sub>0</sub></sub><sup>0</sup> = 2<span class="rt">√<span class="ov">0</span></span> − 2<span class="rt">√<span class="ov">h<sub>0</sub></span></span> = −2<span class="rt">√<span class="ov">h<sub>0</sub></span></span></div>
+<p><b>Right side.</b> The part −<span class="fr"><span>r<sup>2</sup></span><span>R<sup>2</sup></span></span> · 0.6 √(2g) has no <i>h</i> and no <i>t</i>, so it is a constant and can be moved outside the integral. What remains is ∫ dt, which equals <i>t</i>:</p>
+<div class="eq">−<span class="fr"><span>r<sup>2</sup></span><span>R<sup>2</sup></span></span> · 0.6 <span class="rt">√<span class="ov">2g</span></span> · [ t ]<sub>0</sub><sup>T</sup> = −<span class="fr"><span>r<sup>2</sup></span><span>R<sup>2</sup></span></span> · 0.6 <span class="rt">√<span class="ov">2g</span></span> · T</div>
+<p><b>Both sides together:</b></p>
+<div class="eq">−2<span class="rt">√<span class="ov">h<sub>0</sub></span></span> = −<span class="fr"><span>r<sup>2</sup></span><span>R<sup>2</sup></span></span> · 0.6 <span class="rt">√<span class="ov">2g</span></span> · T</div>
+<p>Cancel the minus signs on both sides:</p>
+<div class="eq">2<span class="rt">√<span class="ov">h<sub>0</sub></span></span> = <span class="fr"><span>r<sup>2</sup></span><span>R<sup>2</sup></span></span> · 0.6 <span class="rt">√<span class="ov">2g</span></span> · T</div>
+</section>
+
+<section class="step">
+<h2><span class="badge">Step 5</span>Solve for T</h2>
+<div class="eq big">T = <span class="fr"><span>2<span class="rt">√<span class="ov">h<sub>0</sub></span></span> · R<sup>2</sup></span><span>0.6 · r<sup>2</sup> · <span class="rt">√<span class="ov">2g</span></span></span></span></div>
+<p>To make the numbers easy, split this into three parts: a plain number, the ratio of the areas, and the roots:</p>
+<div class="eq big">T = <span class="fr"><span>2</span><span>0.6</span></span> · <span class="fr"><span>R<sup>2</sup></span><span>r<sup>2</sup></span></span> · <span class="fr"><span><span class="rt">√<span class="ov">h<sub>0</sub></span></span></span><span><span class="rt">√<span class="ov">2g</span></span></span></span></div>
+<p>Here the roots change shape. A root divided by a root is the same number as one root over the whole fraction:</p>
+<div class="eq big"><span class="fr"><span><span class="rt">√<span class="ov">h<sub>0</sub></span></span></span><span><span class="rt">√<span class="ov">2g</span></span></span></span> = <span class="rt">√<span class="ov"><span class="fr"><span>h<sub>0</sub></span><span>2g</span></span></span></span></div>
+<p>So the formula becomes:</p>
+<div class="eq big">T = <span class="fr"><span>2</span><span>0.6</span></span> · <span class="fr"><span>R<sup>2</sup></span><span>r<sup>2</sup></span></span> · <span class="rt">√<span class="ov"><span class="fr"><span>h<sub>0</sub></span><span>2g</span></span></span></span></div>
+</section>
+
+<section class="step">
+<h2><span class="badge">Step 6</span>Plug in the numbers</h2>
+<p>First the ratio of the areas:</p>
+<div class="eq"><span class="fr"><span>R<sup>2</sup></span><span>r<sup>2</sup></span></span> = <span class="fr"><span>0.9<sup>2</sup></span><span>0.03<sup>2</sup></span></span> = 30<sup>2</sup> = 900</div>
+<p>Then the square root:</p>
+<div class="eq"><span class="rt">√<span class="ov"><span class="fr"><span>2.45</span><span>2 · 10</span></span></span></span> = <span class="rt">√<span class="ov">0.1225</span></span> = 0.35</div>
+<p>And the first factor:</p>
+<div class="eq"><span class="fr"><span>2</span><span>0.6</span></span> = <span class="n">3.33…</span></div>
+<p>Put it all together:</p>
+<div class="eq big">T = <span class="fr"><span>2</span><span>0.6</span></span> · 900 · 0.35 = 3000 · 0.35 = 1050 s</div>
+</section>
+
+<section class="ans">
+<h2>Answer</h2>
+<div class="res">T = 1050 s</div>
+<p>That is 17.5 minutes until the tank is completely empty.</p>
+</section>
+</main>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)},T=1050,H0=2.45,t=0,run=false,last=0;
+function draw(){
+var f=Math.max(0,1-t/T),h=H0*f*f,y=260-200*h/H0,sh=Math.min(8,260-y);
+$('wt').setAttribute('y',y);$('wt').setAttribute('height',260-y);
+$('st').setAttribute('y',y);$('st').setAttribute('height',sh);
+$('dhb').setAttribute('d','M350 '+y+' v'+sh+' M345 '+y+' h14 M345 '+(y+sh)+' h14');
+$('dht').setAttribute('y',y+Math.max(sh,6));
+$('hl').setAttribute('d','M350 '+(y+sh)+' V260');
+$('ht').setAttribute('y',(y+sh+260)/2+6);
+$('ht').style.display=h<0.2?'none':'';$('dht').style.display=h<=0?'none':'';
+$('stream').style.display=h>0?'':'none';
+$('rt').textContent='t = '+Math.round(t)+' s ('+(t/60).toFixed(1)+' min)';
+$('rh').textContent='h = '+h.toFixed(2)+' m';
+$('rp').textContent='water left: '+Math.round(f*f*100)+'%';
+$('scrub').value=t;
+}
+function tick(now){
+if(!run)return;
+t+=Math.min((now-last)/1000,0.1)*Number($('spd').value);last=now;
+if(t>=T){t=T;run=false;$('play').textContent='Replay'}
+draw();if(run)requestAnimationFrame(tick);
+}
+$('play').onclick=function(){
+if(run){run=false;$('play').textContent='Play';return}
+if(t>=T)t=0;
+run=true;$('play').textContent='Pause';last=performance.now();requestAnimationFrame(tick);
+};
+$('reset').onclick=function(){run=false;t=0;$('play').textContent='Play';draw()};
+$('scrub').oninput=function(){t=Number(this.value);if(t<T&&!run)$('play').textContent='Play';draw()};
+draw();
+})();
+document.querySelectorAll('.rt').forEach(function(r){var n=r.firstChild;if(n&&n.nodeType===3){var s=document.createElement('span');s.className='sg';s.textContent=n.textContent.trim();r.replaceChild(s,n);var o=r.querySelector('.ov');if(o&&o.querySelector('.fr'))s.classList.add('tall')}});
+</script>
+</body>
+</html>
