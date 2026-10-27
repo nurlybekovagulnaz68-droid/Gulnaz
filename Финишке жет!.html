@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="kk"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Финишке жет!</title>
+<style>
+:root{--bg:#f6f4ee;--fg:#14213d;--card:#ffffff;--ac:#e08a00;--ok:#1b8a5a;--bad:#c0392b;--line:#cfc9b8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14213d;--fg:#f6f4ee;--card:#1f3159;--ac:#fca311;--ok:#4cc38a;--bad:#ff7b6b;--line:#3b4d7a}}
+:root[data-theme="dark"]{--bg:#14213d;--fg:#f6f4ee;--card:#1f3159;--ac:#fca311;--ok:#4cc38a;--bad:#ff7b6b;--line:#3b4d7a}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:Arial,sans-serif;min-height:100vh}
+.w{max-width:880px;margin:0 auto;padding:20px}
+h1{font-size:30px;margin:0 0 4px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.st{display:flex;gap:10px;font-size:20px;font-weight:700}.st span{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:6px 14px}
+.track{position:relative;height:110px;margin:8px 0 18px;background:var(--card);border:2px solid var(--line);border-radius:16px;overflow:hidden}
+.road{position:absolute;left:32px;right:32px;top:78px;height:6px;background:var(--line);border-radius:3px}
+.dot{position:absolute;top:72px;width:16px;height:16px;border-radius:50%;background:var(--line);transform:translateX(-50%)}
+.dot.on{background:var(--ac)}
+.flag{position:absolute;right:8px;top:14px;font-size:30px}
+#wh{position:absolute;top:18px;left:0;width:64px;height:64px;transition:left 1s ease}
+#wh svg{width:64px;height:64px;transition:transform 1s ease}
+.card{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:22px}
+#q{font-size:24px;line-height:1.35;margin:0 0 16px;font-weight:700}
+#bn{display:inline-block;background:var(--ac);color:#14213d;border-radius:8px;padding:2px 10px;font-size:18px;margin-right:8px}
+.o{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:600px){.o{grid-template-columns:1fr}}
+button{font:inherit;cursor:pointer}
+.op{font-size:22px;padding:16px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--fg);text-align:left}
+.op:hover:not(:disabled){border-color:var(--ac)}
+.op.ok{background:var(--ok);color:#fff;border-color:var(--ok)}.op.bad{background:var(--bad);color:#fff;border-color:var(--bad)}
+.op:disabled{cursor:default}
+#fb{font-size:22px;margin:16px 0 0;min-height:30px}
+.nx{margin-top:12px;font-size:22px;font-weight:700;padding:12px 26px;border-radius:12px;border:0;background:var(--ac);color:#14213d}
+.shake{animation:sh .4s}@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.big{font-size:34px;font-weight:700;margin:0 0 10px}
+#vz{margin-top:14px}#vz svg{width:100%;display:block;background:var(--bg);border:2px solid var(--line);border-radius:12px}
+#vl{font-size:22px;font-weight:700;margin:10px 0 0}.rp{font-size:18px;padding:6px 14px;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--fg);margin-top:8px}
+</style></head><body><div class="w">
+<div class="top"><h1>Финишке жет!</h1><div class="st"><span id="s1">Қадам: 0 / 10</span><span id="s2">Ұпай: 0</span></div></div>
+<div class="track" id="tr"><div class="road"></div><div class="flag">🏁</div>
+<div id="wh"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" fill="#e8ecf5" stroke="#14213d" stroke-width="4"/><line x1="32" y1="4" x2="32" y2="60" stroke="#3a86ff" stroke-width="4"/><line x1="4" y1="32" x2="60" y2="32" stroke="#14213d" stroke-width="3"/><circle cx="32" cy="58" r="5" fill="#fca311" stroke="#14213d" stroke-width="2"/></svg></div></div>
+<div class="card" id="box"></div></div>
+<script>
+var N=10,Q=[
+{q:"Дөңгелектің радиусы r = 4 см. Шеңбер ұзындығы C неге тең?",o:["25,1 см","12,6 см","50,2 см","8 см"],a:0,h:"C = 2πr = 2·3,14·4 ≈ 25,1 см"},
+{q:"Диаметрі d = 12 см. C қанша?",o:["37,7 см","18,8 см","75,4 см","24 см"],a:0,h:"C = π·d = 3,14·12 ≈ 37,7 см"},
+{q:"Дөңгелек 1 айналымда 20 см жүрді. Диаметрі қанша?",o:["6,4 см","3,2 см","10 см","20 см"],a:0,h:"d = C/π = 20/3,14 ≈ 6,4 см"},
+{q:"Радиус 2 есе артса, 1 айналымдағы жол қалай өзгереді?",o:["2 есе артады","4 есе артады","өзгермейді","π есе артады"],a:0,h:"C = 2πr: r екі есе артса, C да екі есе артады"},
+{q:"C = 31,4 см болса, радиус r қанша?",o:["5 см","10 см","2,5 см","15,7 см"],a:0,h:"r = C/(2π) = 31,4/6,28 = 5 см"},
+{q:"r = 3 см, дөңгелек 10 рет айналды. Жүрілген жол S қанша?",o:["188,5 см","94,2 см","60 см","376,8 см"],a:0,h:"S = n·2πr = 10·2·3,14·3 ≈ 188,5 см"},
+{q:"d = 5,6 см, дөңгелек 15 рет айналды. S қанша?",o:["2,64 м","1,32 м","0,84 м","5,28 м"],a:0,h:"S = n·π·d = 15·3,14·5,6 ≈ 263,9 см ≈ 2,64 м"},
+{q:"S = 3 м, r = 2,5 см. Дөңгелек неше рет айналады?",o:["≈ 19,1","≈ 38,2","≈ 120","≈ 9,5"],a:0,h:"n = S/(2πr) = 300/(2·3,14·2,5) ≈ 19,1"},
+{q:"Дөңгелек 25 айналымда 4 м жүрді. Диаметрі қанша?",o:["≈ 5,1 см","≈ 2,5 см","≈ 16 см","≈ 10,2 см"],a:0,h:"d = S/(n·π) = 400/(25·3,14) ≈ 5,1 см"},
+{q:"r₁ = 3 см және r₂ = 5 см дөңгелектер 2 м жүреді. Айналым санының айырмасы қанша?",o:["≈ 4,2","≈ 2,1","≈ 10,6","≈ 6,4"],a:0,h:"n₁ = 200/(2π·3) ≈ 10,6; n₂ = 200/(2π·5) ≈ 6,4; айырмасы ≈ 4,2"},
+{q:"Редуктор 3:1 (қозғалтқыш дөңгелектен 3 есе жылдам). r = 4 см, S = 1,5 м. Қозғалтқыш неше рет айналады?",o:["≈ 17,9","≈ 6,0","≈ 53,7","≈ 8,9"],a:0,s:2,h:"Дөңгелек n = 150/(2π·4) ≈ 6; қозғалтқыш 3·n ≈ 17,9"},
+{q:"Диаметр 0,5 мм қателікпен өлшенді. 20 айналымда жолдың қателігі қанша?",o:["≈ 3,14 см","≈ 1,57 см","≈ 0,5 см","≈ 6,28 см"],a:0,s:2,h:"ΔS = n·π·Δd = 20·3,14·0,05 ≈ 3,14 см"}];
+var V=[
+{t:"unwrap",rp:[60],C:[25.1],lbl:"Шеңбер түзу кесіндіге жайылды: C = 2πr = 2·3,14·4 ≈ 25,1 см"},
+{t:"bars",lbl:"d = 12 см: C = 3d + 0,14d ≈ 3,14·d = π·d ≈ 37,7 см"},
+{t:"unwrap",rp:[60],C:[20],rev:1,lbl:"20 см түзу шеңберге оралды → d = C/π ≈ 6,4 см"},
+{t:"unwrap",rp:[30,60],C:[12.6,25.1],lbl:"r екі есе артса, C да екі есе артады: 12,6 см → 25,1 см"},
+{t:"segs",m:6.283,u:"r",tot:"C = 31,4 см",lbl:"C = 2π·r: кесіндіге 2π ≈ 6,28 радиус сыяды → r = 31,4/6,28 = 5 см"},
+{t:"stack",n:10,lbl:"10 айналым = 10 кесінді C: S = 10·C ≈ 188,5 см"},
+{t:"odo",lbl:"15 айналым: S = 15·π·5,6 ≈ 263,9 см ≈ 2,64 м"},
+{t:"ruler",lbl:"300 см жолға C ≈ 15,7 см секірістен n = S/(2πr) ≈ 19,1"},
+{t:"segs",m:25,u:"C",tot:"S = 400 см",lbl:"400 см = 25·C → C = 16 см → d = C/π ≈ 5,1 см"},
+{t:"race",lbl:"Бірдей 2 м жолға: 10,6 және 6,4 айналым, айырмасы ≈ 4,2"},
+{t:"gear",lbl:"Редуктор 3:1: қозғалтқыш 3 есе көп айналады ≈ 17,9"},
+{t:"err",lbl:"Әр айналымда 0,16 см қате қосылады: 20 айналымда ≈ 3,14 см"}];
+var AF=0,P=Math.PI,B={},$=function(i){return document.getElementById(i)},set=function(i,a,v){$(i).setAttribute(a,v)},txt=function(i,t){$(i).textContent=t},F=function(x,d){return x.toFixed(d==null?1:d).replace('.',',')};
+function L(a,b,c,d,col,w,id){return '<line'+(id?' id="'+id+'"':'')+' x1="'+a+'" y1="'+b+'" x2="'+c+'" y2="'+d+'" stroke="'+col+'" stroke-width="'+w+'" stroke-linecap="round"/>'}
+function TX(x,y,t,id,sz,an,col){return '<text'+(id?' id="'+id+'"':'')+' x="'+x+'" y="'+y+'" font-size="'+(sz||24)+'" font-weight="700" text-anchor="'+(an||'start')+'" fill="'+(col||'var(--fg)')+'">'+t+'</text>'}
+function CI(cx,cy,r,id,ex){return '<circle'+(id?' id="'+id+'"':'')+' cx="'+cx+'" cy="'+cy+'" r="'+r+'" '+(ex||'fill="#e8ecf5" stroke="#14213d" stroke-width="4"')+'/>'}
+function RC(x,y,w,h,f,id,ex){return '<rect'+(id?' id="'+id+'"':'')+' x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="'+f+'" '+(ex||'')+'/>'}
+function WH(id,r){return '<g id="'+id+'">'+CI(0,0,r)+L(0,-r,0,r,'#3a86ff',5)+L(-r,0,r,0,'#14213d',3)+CI(0,r,Math.max(4,r*.14),0,'fill="#fca311" stroke="#14213d" stroke-width="2"')+'</g>'}
+B.unwrap=function(v){var s='',y=10,rows=[];v.rp.forEach(function(rp,i){var cx=100,cy=y+rp,x1=250,Cp=2*P*rp;rows.push({rp:rp,x1:x1,Cp:Cp,i:i});
+s+=CI(cx,cy,rp,0,'fill="none" stroke="var(--line)" stroke-width="7"')+'<circle id="oc'+i+'" cx="'+cx+'" cy="'+cy+'" r="'+rp+'" fill="none" stroke="#fca311" stroke-width="7" stroke-dasharray="'+Cp+' '+Cp+'" transform="rotate(-90 '+cx+' '+cy+')"/>'+L(cx,cy,cx+rp,cy,'#3a86ff',5)+TX(cx+rp/2,cy-8,'r',0,20,'middle','#3a86ff')+L(x1,cy,x1+Cp,cy,'var(--line)',3);
+for(var j=0;j<=6;j++)s+=L(x1+j*rp,cy-9,x1+j*rp,cy+9,'#3a86ff',3,'tk'+i+'_'+j);
+s+=L(x1,cy,x1,cy,'#fca311',9,'ln'+i)+TX(x1+Cp+16,cy+8,'','tt'+i,24);y+=2*rp+30});
+return{h:y,s:s,u:function(e){var q=v.rev?1-e:e;rows.forEach(function(r){var i=r.i;set('oc'+i,'stroke-dashoffset',r.Cp*q);set('ln'+i,'x2',r.x1+r.Cp*q);for(var j=0;j<=6;j++)set('tk'+i+'_'+j,'opacity',j*r.rp<=r.Cp*q+.1?1:0);txt('tt'+i,'C = '+F(v.C[i]*(v.rev?1:q))+' см')})}}};
+B.bars=function(v){var s=CI(110,115,60)+L(50,115,170,115,'#3a86ff',6)+TX(110,100,'d',0,24,'middle','#3a86ff')+L(250,60,627,60,'#fca311',10)+TX(250,44,'C = 37,7 см',0,24),c=['#3a86ff','#6ea8ff','#3a86ff'];
+for(var j=0;j<3;j++)s+=RC(250+120*j,95,118,40,c[j],'bk'+j)+TX(309+120*j,124,'d','bl'+j,24,'middle','#fff');
+s+=RC(610,95,17,40,'#14213d','bk3')+TX(619,168,'0,14d',0,22,'middle')+TX(250,215,'','ct',28);
+var th=[.12,.38,.62,.85],tx=['','d','d + d','d + d + d','d + d + d + 0,14d ≈ 3,14·d'];
+return{h:240,s:s,u:function(e){var k=0;for(var j=0;j<4;j++){var on=e>=th[j];if(on)k=j+1;set('bk'+j,'opacity',on?1:.08);if(j<3)set('bl'+j,'opacity',on?1:0)}txt('ct',tx[k])}}};
+B.segs=function(v){var n=Math.ceil(v.m),pw=680/v.m,s=RC(60,90,680,56,'none',0,'stroke="#fca311" stroke-width="4"')+TX(60,74,v.tot,0,26);
+for(var j=0;j<n;j++)s+=RC(60+j*pw,90,Math.min(pw,680-j*pw),56,j%2?'#6ea8ff':'#3a86ff','sg'+j,'opacity="0" stroke="#f6f4ee" stroke-width="1"');
+s+=TX(400,210,'','ct',30,'middle');
+return{h:240,s:s,u:function(e){var k=Math.round(e*n);for(var j=0;j<n;j++)set('sg'+j,'opacity',j<k?1:0);txt('ct',F(Math.min(v.m,e*v.m*1.0001))+' × '+v.u)}}};
+B.stack=function(v){var s='';for(var j=0;j<v.n;j++)s+=RC(60+j*68,100,64,64,j%2?'#6ea8ff':'#3a86ff','sk'+j,'opacity="0" rx="6"')+TX(92+j*68,142,'C','sl'+j,26,'middle','#fff');
+s+=L(60,190,60,190,'#fca311',9,'sb')+TX(60,240,'','ct',30);
+return{h:265,s:s,u:function(e){var k=Math.round(e*v.n);for(var j=0;j<v.n;j++){set('sk'+j,'opacity',j<k?1:0);set('sl'+j,'opacity',j<k?1:0)}set('sb','x2',60+68*v.n*e);txt('ct','n = '+k+' → S = '+F(k*18.85)+' см')}}};
+B.odo=function(v){var s='<g transform="translate(130,125)"></g>'+WH('ow',75)+RC(300,45,440,150,'var(--card)',0,'rx="16" stroke="var(--line)" stroke-width="3"')+TX(325,105,'','od1',42)+TX(325,165,'','od2',34)+RC(60,235,680,16,'none',0,'rx="8" stroke="var(--line)" stroke-width="3"')+RC(60,235,0,16,'#fca311','pb','rx="8"')+TX(740,226,'2,64 м',0,22,'end');
+return{h:275,s:s,u:function(e){set('ow','transform','translate(130,125) rotate('+(e*15*360)+')');txt('od1','S = '+F(e*263.9)+' см');txt('od2','n = '+F(e*15)+' айналым');set('pb','width',680*e)}}};
+B.ruler=function(v){var pw=680*15.708/300,s=L(60,150,740,150,'var(--fg)',4)+TX(60,60,'S = 300 см',0,26)+TX(740,60,'',  'ct',30,'end');
+for(var c=0;c<=300;c+=50)s+=L(60+680*c/300,140,60+680*c/300,160,'var(--fg)',3)+TX(60+680*c/300,190,c,0,22,'middle');
+for(var j=0;j<20;j++){var w=Math.min(pw,680-j*pw);s+='<path id="ar'+j+'" d="M'+(60+j*pw)+' 150 a'+w/2+' '+w/2+' 0 0 1 '+w+' 0" fill="none" stroke="#fca311" stroke-width="5" opacity="0"/>'}
+return{h:215,s:s,u:function(e){for(var j=0;j<20;j++)set('ar'+j,'opacity',e*19.1>j?1:0);txt('ct','n = '+F(e*19.1))}}};
+B.race=function(v){var rp=[24,40],cy=[70,160],nn=[10.61,6.37],nm=['r = 3 см','r = 5 см'],s='';
+rp.forEach(function(r,i){s+=L(40,cy[i]+r,740,cy[i]+r,'var(--line)',3)+WH('rw'+i,r)+TX(60,cy[i]-r-8,'','rc'+i,24)});
+s+=L(700,20,700,215,'#14213d',4)+TX(712,70,'🏁',0,38);
+return{h:225,s:s,u:function(e){rp.forEach(function(r,i){var x=60+e*640;set('rw'+i,'transform','translate('+x+','+cy[i]+') rotate('+((x-60)/r*180/P)+')');txt('rc'+i,nm[i]+': n = '+F(e*nn[i]))})}}};
+B.gear=function(v){function G(id,r,t){var tr=r+5;return '<g id="'+id+'">'+CI(0,0,tr,0,'fill="none" stroke="var(--fg)" stroke-width="10" stroke-dasharray="'+(P*tr/t)+' '+(P*tr/t)+'"')+CI(0,0,r,0,'fill="#e8ecf5" stroke="#14213d" stroke-width="3"')+L(0,0,0,-r+6,'#3a86ff',6)+CI(0,-r+10,6,0,'fill="#fca311"')+'</g>'}
+var s=G('gb',80,24)+G('gs',27,8)+TX(480,95,'','c1',28)+TX(480,150,'','c2',28)+TX(480,215,'қозғалтқыш : дөңгелек = 3 : 1',0,24,'start','#e08a00');
+return{h:260,s:s,u:function(e){set('gb','transform','translate(210,135) rotate('+(e*5.97*360)+')');set('gs','transform','translate(317,135) rotate('+(-e*17.9*360)+')');txt('c1','дөңгелек: n = '+F(e*5.97));txt('c2','қозғалтқыш: n = '+F(e*17.9))}}};
+B.err=function(v){var s=TX(60,66,'шын d = 5,00 см',0,24)+L(60,90,60,90,'#3a86ff',10,'e1')+TX(60,136,'өлшенген d = 5,05 см',0,24)+L(60,160,60,160,'#fca311',10,'e2')+TX(60,206,'жиналған қателік (үлкейтілген)',0,22,'start','#c0392b')+L(60,225,60,225,'#c0392b',12,'e3')+TX(60,262,'','ec',28);
+return{h:280,s:s,u:function(e){var l=600*e;set('e1','x2',60+l);set('e2','x2',60+l*1.01);set('e3','x2',60+400*e);txt('ec','n = '+F(20*e)+' · қателік ≈ '+F(3.14*e,2)+' см')}}};
+function demo(v,el){cancelAnimationFrame(AF);var o=B[v.t](v);el.innerHTML='<svg viewBox="0 0 800 '+o.h+'">'+o.s+'</svg><p id="vl"></p><button class="rp">↻ Қайта көрсету</button>';
+el.querySelector('.rp').onclick=function(){demo(v,el)};var T=v.T||4800,t0=performance.now();
+(function fr(now){var p=Math.min(1,(now-t0)/T),e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;o.u(e);if(p<1)AF=requestAnimationFrame(fr);else $('vl').textContent=v.lbl})(t0)}
+var i,step,score,lock,box=document.getElementById('box'),wh=document.getElementById('wh'),tr=document.getElementById('tr'),dots=[];
+function sh(a){for(var k=a.length-1;k>0;k--){var j=Math.floor(Math.random()*(k+1)),t=a[k];a[k]=a[j];a[j]=t}return a}
+for(var k=0;k<=N;k++){var d=document.createElement('div');d.className='dot';d.style.left='calc(32px + (100% - 64px)*'+k/N+')';tr.appendChild(d);dots.push(d)}
+function pos(){var f=Math.min(step,N)/N;wh.style.left='calc(('+'100% - 64px)*'+f+')';wh.firstChild.style.transform='rotate('+(step*360)+'deg)';
+document.getElementById('s1').textContent='Қадам: '+Math.min(step,N)+' / '+N;document.getElementById('s2').textContent='Ұпай: '+score;
+dots.forEach(function(d,k){d.className='dot'+(k<=step?' on':'')})}
+function start(){i=0;step=0;score=0;pos();show()}
+function show(){cancelAnimationFrame(AF);lock=false;var q=Q[i],opts=sh(q.o.map(function(t,k){return{t:t,c:k==q.a}}));
+box.innerHTML='<p id="q">'+(q.s?'<span id="bn">★ ×2 қадам</span>':'')+(i+1)+'/'+Q.length+'. '+q.q+'</p><div class="o"></div><p id="fb"></p><div id="nz"></div>';
+var o=box.querySelector('.o');opts.forEach(function(x){var b=document.createElement('button');b.className='op';b.textContent=x.t;b.onclick=function(){pick(b,x.c,opts)};o.appendChild(b)})}
+function pick(b,c,opts){if(lock)return;lock=true;var q=Q[i],bs=box.querySelectorAll('.op'),fb=document.getElementById('fb');
+bs.forEach(function(x,k){x.disabled=true;if(opts[k].c)x.className='op ok'});
+if(c){var s=q.s||1;step=Math.min(N,step+s);score+=10*s;fb.textContent='Дұрыс! Робот '+s+' қадам алға жүрді. '+q.h;fb.style.color='var(--ok)'}
+else{b.className='op bad';box.classList.add('shake');setTimeout(function(){box.classList.remove('shake')},400);fb.textContent='Қате. '+q.h;fb.style.color='var(--bad)'}
+var vz=document.createElement('div');vz.id='vz';fb.parentNode.insertBefore(vz,fb.nextSibling);demo(V[i],vz);pos();var n=document.createElement('button');n.className='nx';n.textContent=step>=N||i>=Q.length-1?'Нәтиже →':'Келесі →';n.onclick=function(){i++;if(step>=N||i>=Q.length)end();else show()};document.getElementById('nz').appendChild(n)}
+function end(){cancelAnimationFrame(AF);var w=step>=N;box.innerHTML='<p class="big">'+(w?'🏁 Финишке жеттің!':'Финишке '+(N-step)+' қадам жетпеді')+'</p><p style="font-size:22px">Қадам: '+Math.min(step,N)+' / '+N+' · Ұпай: '+score+'</p><button class="nx" id="re">Қайта ойнау</button>';document.getElementById('re').onclick=start}
+start();
+</script></body></html>
