@@ -1,114 +1,243 @@
 <!DOCTYPE html>
-<html lang="ru"><head><meta charset="utf-8">
+<html lang="ru">
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Управление функционированием и развитием образовательной организации</title>
+<title>Единство содержания, форм контроля за исполнением всех видов планирования работы школы</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;800&display=swap">
 <style>
-:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
---bg:#fff8ef;--card:#fff;--tx:#23203a;--mut:#615d7d;--p:#6c4cf1;--o:#ff7a3d;--g:#12b886;--b:#2f9bff;--pk:#f0508c;--y:#ffc233;--bd:#eadfce}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16142a;--card:#201d3b;--tx:#f2f0ff;--mut:#b0acd0;--bd:#34305a}}
-html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--bd);display:flex;gap:6px;overflow-x:auto;padding:8px 12px}
-nav a{white-space:nowrap;color:var(--tx);text-decoration:none;padding:6px 12px;border-radius:20px;font-size:14px;font-weight:600}nav a:hover{background:var(--p);color:#fff}
-.hero{background:linear-gradient(135deg,#6c4cf1,#f0508c 60%,#ff7a3d);color:#fff;padding:56px 20px 64px;text-align:center}
-.hero h1{margin:10px auto 12px;font-size:clamp(26px,5vw,44px);line-height:1.15;max-width:860px}.hero p{max-width:700px;margin:0 auto;font-size:18px}
-.tag{display:inline-block;background:rgba(255,255,255,.22);padding:4px 14px;border-radius:20px;font-size:14px;font-weight:600}
-main{max-width:1000px;margin:0 auto;padding:0 16px 40px}section{margin-top:46px}
-h2{font-size:28px;margin:0 0 6px;line-height:1.25}h2 span{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--p);color:#fff;font-size:18px;margin-right:10px;vertical-align:middle}
-.lead{color:var(--mut);margin:0 0 18px}
-.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:18px;box-shadow:0 4px 14px rgba(108,76,241,.07)}
-.card h3{margin:6px 0;font-size:18px}.card p{margin:0;font-size:15.5px;color:var(--mut)}.card ul{margin:8px 0 0;padding-left:20px;font-size:15.5px;color:var(--mut)}
-.ic{font-size:30px}.top{border-top:6px solid var(--c,var(--p))}
-.method{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.method span{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:6px 14px;font-size:14px;font-weight:600}
-.cloud{display:flex;flex-wrap:wrap;gap:10px 16px;justify-content:center;align-items:center;padding:22px;background:var(--card);border:1px solid var(--bd);border-radius:20px}
-.cloud b{font-weight:800}
-.def{font-size:20px;font-weight:700;text-align:center;padding:26px;border-radius:20px;background:linear-gradient(135deg,var(--b),var(--g));color:#fff;margin-bottom:16px}
-.cyc{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin:16px 0}
-.step{color:#fff;font-weight:700;padding:12px 16px;border-radius:16px;text-align:center;min-width:120px}
-details{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px 16px;margin:10px 0}
-summary{cursor:pointer;font-weight:700}details p{margin:8px 0 0;color:var(--mut);font-size:15.5px}
-.vs{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:560px;background:var(--card);border-radius:14px;overflow:hidden;font-size:15px}
-th,td{padding:10px 12px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}th{background:var(--p);color:#fff;font-size:14px}
-.note{background:rgba(255,194,51,.2);border-left:5px solid var(--y);padding:12px 16px;border-radius:10px;font-size:15px;margin-top:14px}
-dl{display:grid;gap:10px;margin:0}dt{font-weight:700;color:var(--p)}dd{margin:0 0 4px;color:var(--mut);font-size:15.5px}
-footer{text-align:center;color:var(--mut);padding:24px;font-size:14px}
-</style></head><body>
-<nav><a href="#essence">Что это</a><a href="#two">Две стороны</a><a href="#func">Функции</a><a href="#who">Кто управляет</a><a href="#tools">Документы</a><a href="#dev">Как развиваться</a><a href="#prob">Проблемы</a><a href="#end">Выводы</a></nav>
-<header class="hero"><span class="tag">Менеджмент в образовании · Контент-анализ</span>
-<h1>Управление функционированием и развитием образовательной организации</h1>
-<p>Как школа, колледж или вуз в Казахстане работает каждый день и как при этом становится лучше. Тема раскрыта по материалам научных работ и казахстанских нормативных документов.</p></header>
-<main>
+:root{--bg:#fff8ec;--card:#fff;--ink:#2b2a33;--mute:#6b6878;--line:#eee3cf;--c:#ff6fa5;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1b26;--card:#2a2736;--ink:#f4f1fa;--mute:#b4afc4;--line:#3b3750}}
+:root[data-theme="dark"]{--bg:#1d1b26;--card:#2a2736;--ink:#f4f1fa;--mute:#b4afc4;--line:#3b3750}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 Nunito,system-ui,sans-serif}
+h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;line-height:1.2;margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding:20px}
+.hero{text-align:center;padding:20px 8px 6px;max-width:900px;margin:0 auto}
+.hero h1{font-size:clamp(24px,4.2vw,40px)}
+.hero p{margin:12px auto 0;color:var(--mute);font-size:18px}
+.how{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px 0 6px}
+.how span{background:var(--card);border:2px dashed var(--line);border-radius:99px;padding:5px 14px;font-weight:700;font-size:15px}
+.stage{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:28px;align-items:start;margin-top:10px}
+@media(max-width:900px){.stage{grid-template-columns:1fr}}
+.left{position:sticky;top:12px}
+@media(max-width:900px){.left{position:static}}
+svg.daisy{width:100%;height:auto;display:block;filter:drop-shadow(0 10px 14px rgba(0,0,0,.12))}
+.petal{cursor:pointer;outline:none}
+.petal .shape{transition:transform .25s;transform-origin:250px 250px}
+.petal:hover .shape,.petal:focus-visible .shape{transform:scale(1.05)}
+.petal.on ellipse{stroke:#2b2a33;stroke-width:5}
+.petal text{font-family:Fredoka,sans-serif;font-weight:600;fill:#2b2a33;pointer-events:none}
+.hint{text-align:center;color:var(--mute);font-weight:700;margin-top:6px}
+.panel{background:var(--card);border-radius:28px;padding:22px;border:3px solid var(--c);box-shadow:0 8px 0 var(--c)}
+.tag{display:inline-block;background:var(--c);color:#2b2a33;font-weight:800;border-radius:99px;padding:3px 16px;font-size:15px}
+.panel h2{font-size:clamp(22px,3.4vw,29px);margin:10px 0 14px}
+details{border:2px solid var(--line);border-radius:20px;margin:12px 0;overflow:hidden;background:var(--card)}
+summary{list-style:none;cursor:pointer;padding:12px 16px;font-weight:800;font-size:18px;background:color-mix(in srgb,var(--c) 25%,var(--card));display:flex;gap:10px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary:before{content:"❓";flex:none}
+summary:after{content:"▾";margin-left:auto;flex:none;transition:transform .2s}
+details[open] summary:after{transform:rotate(180deg)}
+summary:focus-visible{outline:3px solid var(--ink);outline-offset:-3px}
+.ans{padding:6px 16px 16px}
+.ans p{margin:10px 0}
+.ans h3{font-size:18px;margin:14px 0 8px}
+.grid{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.grid>.item{flex:0 0 calc((100% - 20px)/3);min-width:0;text-align:center}
+.grid:has(>.item:nth-child(4):last-child)>.item,.grid:has(>.item:nth-child(2):last-child)>.item{flex-basis:calc((100% - 10px)/2)}
+@media(max-width:600px){.grid>.item,.grid:has(>.item:nth-child(4):last-child)>.item,.grid:has(>.item:nth-child(2):last-child)>.item{flex-basis:calc((100% - 10px)/2)!important}}
+.item{background:color-mix(in srgb,var(--c) 14%,var(--card));border:2px solid var(--line);border-radius:16px;padding:10px 12px}
+.item b{display:block}.item small{color:var(--mute);font-size:14px;line-height:1.35;display:block}
+.ico{font-size:26px;display:block;line-height:1.2}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{counter-increment:s;display:flex;gap:12px;align-items:flex-start;margin:9px 0}
+.steps li:before{content:counter(s);flex:none;width:32px;height:32px;border-radius:50%;background:var(--c);color:#2b2a33;font:600 18px Fredoka,sans-serif;display:grid;place-items:center}
+.cascade{display:flex;flex-direction:column;gap:6px;align-items:center;margin:12px 0}
+.cascade div{border-radius:14px;padding:7px 12px;text-align:center;font-weight:700;color:#2b2a33;font-size:15px}
+.cmp{width:100%;border-collapse:collapse;font-size:15px}
+.cmp th,.cmp td{padding:8px;border-bottom:2px solid var(--line);text-align:left;vertical-align:top}
+.cmp td:first-child{font-weight:800;white-space:nowrap}
+.scroll{overflow-x:auto}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+@media(max-width:560px){.two{grid-template-columns:1fr}}
+.bad{background:#ffe3e3;color:#5a1d1d;border-radius:16px;padding:12px}
+.good{background:#dcf7e3;color:#14401f;border-radius:16px;padding:12px}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+button.btn{font:700 16px Nunito,sans-serif;border:0;border-radius:99px;padding:10px 20px;background:var(--c);color:#2b2a33;cursor:pointer}
+button.btn:focus-visible{outline:3px solid var(--ink)}
+.fin{margin-top:36px;background:var(--card);border-radius:28px;padding:26px;border:3px solid var(--line)}
+.fin h2{font-size:28px;margin-bottom:10px}
+.final{font:600 21px/1.4 Fredoka,Nunito,sans-serif;background:#fff1a0;color:#2b2a33;border-radius:18px;padding:16px 18px;margin:18px 0 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
+.chips span{border-radius:99px;padding:6px 14px;font-weight:700;color:#2b2a33}
+footer{text-align:center;color:var(--mute);padding:24px 0 8px;font-size:15px}
+@media(prefers-reduced-motion:reduce){.petal .shape,summary:after{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+<h1>Единство содержания, форм контроля за исполнением всех видов планирования работы школы</h1>
+<p>Школьные планы должны работать как одна команда, а не как несколько оркестров. Разберём тему с помощью ромашки Блума.</p>
 
-<section id="essence"><h2><span>1</span>Что такое управление образовательной организацией</h2>
-<p class="lead">Во всех источниках повторяются одни и те же ключевые слова. Чем крупнее слово, тем важнее оно для темы.</p>
-<div class="cloud">
-<b style="font-size:34px;color:var(--p)">цель</b><b style="font-size:28px;color:var(--o)">результат</b><b style="font-size:38px;color:var(--pk)">управление</b><b style="font-size:24px;color:var(--g)">планирование</b><b style="font-size:30px;color:var(--b)">качество</b><b style="font-size:22px;color:var(--o)">контроль</b><b style="font-size:32px;color:var(--g)">развитие</b><b style="font-size:26px;color:var(--p)">коллектив</b><b style="font-size:20px;color:var(--pk)">анализ</b><b style="font-size:24px;color:var(--b)">ресурсы</b><b style="font-size:22px;color:var(--g)">инновации</b><b style="font-size:20px;color:var(--o)">устав</b><b style="font-size:26px;color:var(--pk)">стабильность</b></div>
-<div class="def" style="margin-top:16px">Управление образовательной организацией — это целенаправленная работа руководителя и коллектива по организации деятельности, которая обеспечивает стабильную работу сегодня и рост качества завтра.</div>
+</header>
+
+<div class="stage">
+<div class="left">
+<svg class="daisy" viewBox="0 0 500 500" role="group" aria-label="Ромашка Блума, шесть лепестков" id="daisy"></svg>
+<div class="hint">🌼 Выберите лепесток</div>
+</div>
+<article class="panel" id="panel" aria-live="polite"></article>
+</div>
+
+<section class="fin">
+<h2>✅ Вывод</h2>
+<ol class="steps" style="--c:#ffd93d">
+<li><span><b>Единство планирования</b> значит, что все планы школы (общешкольный, педсовета, методсовета, методических объединений, классных руководителей; долго-, средне- и краткосрочные) работают на одну цель и не противоречат друг другу.</span></li>
+<li><span><b>Единство содержания:</b> каждый план вытекает из плана выше, нет повторов, пропусков и наложений.</span></li>
+<li><span><b>Единство форм контроля:</b> одинаковые критерии, сроки и формы отчётности. Контроль доводится до решения и повторной проверки.</span></li>
+<li><span><b>Результат:</b> меньше лишних бумаг, понятная ответственность, равномерная нагрузка и достижение цели школы.</span></li></ol>
+<p class="final">Согласованные планы и понятный контроль превращают работу школы из набора отдельных дел в единую систему.</p>
+</section>
+<footer><b>Менеджмент в образовании</b><br>Подготовили: учитель математики, группа 401/3</footer>
+</div>
+
+<script>
+const P=[
+{n:'Простой',e:'🔎',c:'#ff6fa5',l:'#ffc2da',t:'Что? Кто? Когда?',qa:[
+['Какие виды планов есть в школе?',`<p>План отвечает на четыре вопроса: что делаем, кто делает, к какому сроку, как проверим. В школе таких планов много, и их удобно разложить двумя способами.</p>
+<h3>📅 По сроку</h3><div class="grid">
+<div class="item"><span class="ico">🔭</span><b>Долгосрочный</b><small>На 3–5 лет. Программа развития школы: куда школа хочет прийти</small></div>
+<div class="item"><span class="ico">🗓️</span><b>Среднесрочный</b><small>На учебный год. Годовой план: какие задачи решаем в этом году</small></div>
+<div class="item"><span class="ico">⏱️</span><b>Краткосрочный</b><small>На четверть, месяц, неделю, урок. Конкретные шаги</small></div></div>
+<h3>👥 По тому, чья это работа</h3><div class="grid">
+<div class="item"><span class="ico">🏫</span><b>Общешкольный</b><small>Главный план. Объединяет учебную, воспитательную и методическую работу</small></div>
+<div class="item"><span class="ico">🗣️</span><b>Педсовет</b><small>Темы заседаний, вопросы, решения, сроки</small></div>
+<div class="item"><span class="ico">🧑‍🏫</span><b>Методсовет</b><small>Обучение и рост учителей, семинары, открытые уроки</small></div>
+<div class="item"><span class="ico">📚</span><b>Методические объединения (МО)</b><small>Работа учителей одного предмета: программы, олимпиады, контроль знаний</small></div>
+<div class="item"><span class="ico">🎒</span><b>Классный руководитель</b><small>Воспитание, дела и события класса, работа с родителями</small></div></div>
+<p>Все они вложены друг в друга: программа развития → годовой план → планы четвертей → планы недель и уроков.</p>`],
+['Кто составляет планы и кто их утверждает?',`<p>Главное правило: <b>пишет тот, кто будет выполнять, а утверждает тот, кто отвечает за результат.</b></p>
+<div class="scroll"><table class="cmp"><tr><th>План</th><th>Кто пишет</th><th>Где обсуждают</th><th>Кто утверждает</th></tr>
+<tr><td>🏫 Общешкольный</td><td>Директор и завучи</td><td>Педсовет</td><td>Директор</td></tr>
+<tr><td>🗣️ Педсовета</td><td>Завуч по учебной работе</td><td>Педсовет</td><td>Директор</td></tr>
+<tr><td>🧑‍🏫 Методсовета</td><td>Завуч по методической работе</td><td>Методсовет</td><td>Директор</td></tr>
+<tr><td>📚 МО (по предметам)</td><td>Руководитель МО</td><td>Заседание МО</td><td>Завуч, затем директор</td></tr>
+<tr><td>🎒 Классного руководителя</td><td>Классный руководитель</td><td>Объединение классных руководителей</td><td>Завуч по воспитательной работе</td></tr></table></div>
+<p>В школах Казахстана планы обычно готовят заместители директора по учебной, воспитательной и методической работе. Названия должностей могут немного отличаться, но логика та же: исполнитель пишет, руководитель проверяет согласованность и утверждает.</p>`]]},
+{n:'Уточняющий',e:'🧐',c:'#ff9f43',l:'#ffd9a8',t:'Правильно ли я понимаю, что…?',qa:[
+['Правильно ли я понимаю, что план классного руководителя вытекает из общешкольного?',`<p><b>Да, правильно.</b> Каждый план берёт цель у плана выше и превращает её в свои конкретные дела. Нельзя писать план «с нуля» и «для галочки».</p>
+<div class="cascade">
+<div style="background:#ff6fa5;width:58%">🎯 Цель школы на год</div>
+<div style="background:#ff9f43;width:68%">🏫 Общешкольный план</div>
+<div style="background:#ffd93d;width:80%">🗣️ Педсовет · методсовет · МО</div>
+<div style="background:#6bcb77;width:90%">🎒 Классные руководители, учителя</div>
+<div style="background:#4dabf7;width:100%">📝 Планы уроков и воспитательные дела</div></div>
+<h3>Пример, как цель доходит до класса</h3>
+<ol class="steps"><li><span><b>Школа:</b> повысить читательскую грамотность учеников.</span></li>
+<li><span><b>МО русского языка:</b> провести неделю чтения и диагностику.</span></li>
+<li><span><b>Классный руководитель 6 «Б»:</b> классный час «Что я читаю» и встреча с родителями о домашнем чтении.</span></li>
+<li><span><b>Учитель на уроке:</b> задания на работу с текстом.</span></li></ol>`],
+['Правильно ли я понимаю, что планы пишутся только сверху вниз?',`<p><b>Нет, неправильно.</b> Цель и рамки задаёт руководство, но идеи и реальные дела приходят и снизу: учителя лучше знают, что происходит в классах.</p>
+<ol class="steps"><li><span><b>Сверху:</b> директор и завучи определяют цель и задачи года.</span></li>
+<li><span><b>Снизу:</b> МО и классные руководители предлагают, как их выполнить.</span></li>
+<li><span><b>Вместе:</b> предложения сверяют, убирают повторы, утверждают.</span></li></ol>
+<div class="two"><div class="good"><b>✅ Верно</b><br>Цель сверху, идеи снизу, общее согласование.</div><div class="bad"><b>❌ Неверно</b><br>Приказали выполнить, не спросив тех, кто будет работать. Или каждый пишет что хочет.</div></div>`]]},
+{n:'Интерпретационный',e:'💡',c:'#f5c400',l:'#fff1a0',t:'Почему так?',qa:[
+['Почему содержание планов должно быть единым?',`<p>Единство содержания значит, что все планы работают на одну цель и не противоречат друг другу. Вот почему это важно.</p>
 <div class="grid">
-<div class="card"><h3>Образовательная организация</h3><p>Школа, колледж, вуз, детский сад: юридическое лицо, которое учит и воспитывает людей.</p></div>
-<div class="card"><h3>Функционирование</h3><p>Организация каждый день выполняет свою работу по правилам: уроки, расписание, отчёты.</p></div>
-<div class="card"><h3>Развитие</h3><p>Организация осознанно меняется и улучшается: новые цели, методики и результаты.</p></div></div></section>
-
-<section id="two"><h2><span>2</span>Две стороны одной задачи</h2>
-<p class="lead">Анализ показал: авторы почти всегда говорят о двух процессах, которые нельзя разделить.</p>
-<div class="vs">
-<div class="card top" style="--c:var(--b)"><div class="ic">⚙️</div><h3>Функционирование: «работать надёжно»</h3><ul><li>учебный план и расписание выполняются</li><li>соблюдаются устав и закон</li><li>есть ресурсы: кадры, помещения, оборудование</li><li>ведётся текущий контроль</li></ul><p style="margin-top:8px"><b>Главный вопрос:</b> всё ли идёт как положено?</p></div>
-<div class="card top" style="--c:var(--pk)"><div class="ic">🚀</div><h3>Развитие: «становиться лучше»</h3><ul><li>формулируется миссия и стратегия</li><li>разрабатывается программа развития</li><li>внедряются инновации</li><li>растёт профессионализм педагогов</li></ul><p style="margin-top:8px"><b>Главный вопрос:</b> куда и зачем мы движемся?</p></div></div>
-<div class="note">💡 Если есть только функционирование, организация стоит на месте и со временем отстаёт. Если есть только развитие без порядка, возникает хаос. Хороший руководитель держит оба процесса вместе.</div></section>
-
-<section id="func"><h2><span>3</span>Функции управления: из чего состоит работа руководителя</h2>
-<p class="lead">Источники описывают управление как цикл, который повторяется постоянно.</p>
-<div class="cyc"><div class="step" style="background:var(--p)">Анализ</div>→<div class="step" style="background:var(--o)">Цели и планирование</div>→<div class="step" style="background:var(--g)">Организация</div>→<div class="step" style="background:var(--y);color:#23203a">Мотивация</div>→<div class="step" style="background:var(--b)">Контроль</div>→<div class="step" style="background:var(--pk)">Регулирование</div>↺</div>
-<details open><summary>🔎 Анализ: где мы сейчас?</summary><p>Руководитель изучает результаты обучения, состояние кадров, ресурсы и запросы родителей. Без анализа цели получаются случайными.</p></details>
-<details><summary>🎯 Цели и планирование: куда идём?</summary><p>Определяются цели на год и на несколько лет, задачи, сроки и ответственные. Так появляются годовой план и программа развития.</p></details>
-<details><summary>🏗️ Организация: кто и что делает?</summary><p>Распределяются обязанности, создаются рабочие группы и методические объединения, налаживается взаимодействие.</p></details>
-<details><summary>🔥 Мотивация: почему люди хотят работать лучше?</summary><p>Признание, поддержка, возможность учиться и участвовать в решениях. Современные источники выдвигают эту функцию на первый план.</p></details>
-<details><summary>✅ Контроль: что получилось?</summary><p>Сравнение фактического результата с планом. Современный смысл контроля — не наказание, а помощь в улучшении.</p></details>
-<details><summary>🔧 Регулирование: что поправить?</summary><p>По итогам контроля вносятся изменения, и цикл начинается заново на более высоком уровне.</p></details></section>
-
-<section id="who"><h2><span>4</span>Кто управляет организацией</h2>
-<p class="lead">Казахстанское законодательство сочетает единоначалие и общественное участие: решение принимает директор, но не в одиночку.</p>
+<div class="item"><span class="ico">🎯</span><b>Все идут к одной цели</b><small>Если цель школы одна, то и усилия не распыляются. Каждый видит, зачем он делает своё дело</small></div>
+<div class="item"><span class="ico">♻️</span><b>Нет повторов</b><small>Одну и ту же тему не проводят три раза в разных планах, а время учителей экономится</small></div>
+<div class="item"><span class="ico">⚖️</span><b>Нет перегрузки</b><small>Нагрузка на детей и учителей распределена равномерно, нет «пиковых» недель</small></div>
+<div class="item"><span class="ico">🧾</span><b>Понятно, кто отвечает</b><small>У каждого дела есть исполнитель и срок, значит, есть с кого спросить</small></div>
+<div class="item"><span class="ico">🧩</span><b>Нет пропусков</b><small>Все задачи школы кому-то поручены, и ничего не теряется между планами</small></div></div>
+<p>Сравнение: оркестр играет по одной партитуре. Если у каждого музыканта своя нота, получается шум, даже если все стараются.</p>`],
+['Почему важно единство форм контроля?',`<p>Контроль нужен, чтобы понять, выполняется ли план. Если у каждого проверяющего свои правила, контроль превращается в путаницу.</p>
+<div class="grid"><div class="item"><span class="ico">📏</span><b>Общие критерии</b><small>Учитель заранее знает, по чему его работу оценят</small></div>
+<div class="item"><span class="ico">📊</span><b>Можно сравнивать</b><small>Результаты МО и классов измерены одной меркой, видно, где лучше и где хуже</small></div>
+<div class="item"><span class="ico">🤝</span><b>Доверие</b><small>Проверка воспринимается как помощь, а не как попытка «поймать»</small></div>
+<div class="item"><span class="ico">🕒</span><b>Экономия времени</b><small>Одна форма отчёта вместо трёх разных для одного и того же</small></div></div>
+<p><b>Итог:</b> единые сроки, критерии и формы отчётности делают контроль понятным, справедливым и полезным для решений.</p>`]]},
+{n:'Творческий',e:'🎨',c:'#4cc35f',l:'#c4f0c0',t:'Что было бы, если…?',qa:[
+['Что было бы, если бы в школе общешкольный план, планы педсовета, методсовета, методических объединений и классных руководителей жили каждый сам по себе?',`<p>Представьте обычный понедельник. Завуч ждёт отчёт по теме года, а у педсовета другая тема. Предметники поставили контрольные на один день, классный руководитель назначил поездку. Контроль тоже у каждого свой: одному нужна справка, другому таблица.</p>
 <div class="grid">
-<div class="card top" style="--c:var(--p)"><div class="ic">👤</div><h3>Директор (руководитель)</h3><p>Отвечает за всю деятельность, подписывает документы, управляет ресурсами и кадрами.</p></div>
-<div class="card top" style="--c:var(--o)"><div class="ic">👩‍🏫</div><h3>Педагогический совет</h3><p>Решает учебные и методические вопросы вместе с педагогами.</p></div>
-<div class="card top" style="--c:var(--g)"><div class="ic">🏛️</div><h3>Попечительский совет</h3><p>Работает на безвозмездной основе. В него входят родители, представители общественности, бизнеса и учредителя. Помогает с ресурсами и развитием.</p></div>
-<div class="card top" style="--c:var(--b)"><div class="ic">🏢</div><h3>Учредитель</h3><p>Для государственных школ это местный исполнительный орган: управление или отдел образования акимата.</p></div>
-<div class="card top" style="--c:var(--pk)"><div class="ic">👨‍👩‍👧</div><h3>Родители и обучающиеся</h3><p>Участвуют через советы, опросы и обратную связь о качестве образования.</p></div></div>
-<div class="note">📌 В Казахстане порядок работы попечительского совета и его избрания определяют Типовые правила, утверждённые приказом Министерства просвещения РК (действующая редакция 2023 года). Закон РК «Об образовании» часто обновляется, поэтому проверяйте актуальную редакцию на сайте adilet.zan.kz.</div></section>
-
-<section id="tools"><h2><span>5</span>Главные документы управления</h2>
-<p class="lead">В Казахстане управление опирается на Закон «Об образовании», государственные общеобязательные стандарты образования (ГОСО) и приказы Министерства просвещения.</p>
-<div class="scroll"><table><tr><th>Документ</th><th>Для чего нужен</th><th>Какую сторону обслуживает</th></tr>
-<tr><td><b>Устав</b></td><td>Основной закон организации: цели, структура, права и обязанности.</td><td>Функционирование</td></tr>
-<tr><td><b>Годовой план</b></td><td>Конкретные задачи, сроки и ответственные на учебный год.</td><td>Функционирование</td></tr>
-<tr><td><b>Должностные инструкции</b></td><td>Кто за что отвечает.</td><td>Функционирование</td></tr>
-<tr><td><b>Программа развития</b></td><td>Стратегия на несколько лет: миссия, цели, проекты, ожидаемые результаты.</td><td>Развитие</td></tr>
-<tr><td><b>ГОСО (государственный стандарт)</b></td><td>Обязательные требования к содержанию и результатам образования для всех организаций.</td><td>Функционирование</td></tr>
-<tr><td><b>Самооценка и внутренняя оценка качества</b></td><td>Организация сама анализирует результаты, находит слабые места и готовится к внешней оценке.</td><td>Обе стороны</td></tr></table></div></section>
-
-<section id="dev"><h2><span>6</span>Как организация развивается</h2>
-<p class="lead">По идеям Поташника и Лазарева развитие — это управляемый процесс, а не случайность.</p>
+<div class="item"><span class="ico">📆</span><b>Хаос в календаре</b><small>Контрольные, конкурсы и поездки наслаиваются, дети устают, качество знаний падает</small></div>
+<div class="item"><span class="ico">🧩</span><b>Разные цели</b><small>Тема года у школы одна, а в планах МО и классов разные. Усилия идут в разные стороны</small></div>
+<div class="item"><span class="ico">📝</span><b>Лишние бумаги</b><small>Одни данные сдают несколько раз в разных формах, учителя теряют время на отчёты вместо уроков</small></div>
+<div class="item"><span class="ico">🕳️</span><b>Дыры</b><small>Важное дело есть в плане школы, но его никто не взял, и оно не сделано</small></div>
+<div class="item"><span class="ico">🤷</span><b>«Это не я»</b><small>Нет общей картины, и директор не видит, достигнута ли цель</small></div></div>
+<p><b>Результат:</b> школа много работает, но движется не туда, куда нужно.</p>`],
+['Что было бы, если бы в школе были единые содержание планов и единые формы контроля?',`<p>Посмотрим на школу глазами разных людей: что было и что стало.</p>
+<div class="scroll"><table class="cmp"><tr><th>Кто</th><th>Без единства</th><th>С единством</th></tr>
+<tr><td>🏫 Директор</td><td>Не видит общей картины</td><td>Видит по одной схеме, где цель выполнена, а где нет</td></tr>
+<tr><td>📋 Завуч</td><td>Собирает отчёты в разных формах</td><td>Получает единые отчёты и сравнивает их</td></tr>
+<tr><td>🧑‍🏫 Учитель</td><td>Пишет одно и то же несколько раз</td><td>Пишет один раз и знает, чего от него ждут</td></tr>
+<tr><td>🎒 Классный руководитель</td><td>Планирует «от себя»</td><td>Берёт задачи из плана школы</td></tr>
+<tr><td>👨‍👩‍👧 Ученик и родитель</td><td>Перегрузка и сюрпризы</td><td>Понятный, спокойный календарь</td></tr></table></div>
+<h3>Что для этого нужно</h3>
+<ol class="steps"><li><span>Единый календарь школы на год.</span></li><li><span>Единые шаблоны планов и отчётов.</span></li><li><span>Один ответственный за сведение планов, обычно завуч.</span></li><li><span>Регулярная сверка, например раз в четверть.</span></li></ol>
+<div class="good"><b>✅ Вывод:</b> единство не добавляет бумаг, а убирает лишние. У всех одна цель, один календарь и одни правила проверки.</div>`]]},
+{n:'Оценочный',e:'⚖️',c:'#3fa9f5',l:'#bfe3ff',t:'Как оценить?',qa:[
+['Какая форма контроля наиболее эффективна и почему?',`<p>Универсальной лучшей формы нет. Каждая показывает своё, поэтому важно уметь выбирать.</p>
+<div class="scroll"><table class="cmp"><tr><th>Форма</th><th>Что показывает</th><th>Плюс</th><th>Минус</th></tr>
+<tr><td>📄 Справка</td><td>Итог проверки с выводами</td><td>Чётко, остаётся документ</td><td>Сухо, не видно причин</td></tr>
+<tr><td>💬 Собеседование</td><td>Причины и трудности</td><td>Живой разговор, можно помочь</td><td>Зависит от человека</td></tr>
+<tr><td>👀 Посещение уроков</td><td>Как план работает на деле</td><td>Самая честная картина</td><td>Много времени</td></tr>
+<tr><td>📊 Отчёт</td><td>Итоги за период в цифрах</td><td>Удобно сравнивать</td><td>Можно приукрасить</td></tr></table></div>
+<h3>Виды контроля по охвату</h3><div class="grid">
+<div class="item"><span class="ico">🎯</span><b>Тематический</b><small>Один вопрос в разных классах</small></div>
+<div class="item"><span class="ico">🌐</span><b>Фронтальный</b><small>Всё в одном классе или у одного учителя</small></div>
+<div class="item"><span class="ico">👤</span><b>Персональный</b><small>Работа конкретного учителя</small></div>
+<div class="item"><span class="ico">🔭</span><b>Обзорный</b><small>Общее состояние дел</small></div></div>
+<p><b>🏆 Вывод:</b> эффективнее всего сочетание. Отчёт показывает картину, уроки показывают реальность, собеседование объясняет причины, справка фиксирует решение.</p>`],
+['Как понять, что контроль сработал?',`<p>Хороший контроль заканчивается не справкой, а изменением. Проверьте по пяти признакам:</p>
+<ol class="steps"><li><span><b>Проблема найдена</b> и названа конкретно, а не «слабая работа».</span></li>
+<li><span><b>Принято решение:</b> что именно исправить.</span></li>
+<li><span><b>Назначены</b> срок и ответственный.</span></li>
+<li><span><b>Проведена повторная проверка:</b> решение выполнено.</span></li>
+<li><span><b>Результат стал лучше:</b> это видно по уроку, отчёту или оценкам.</span></li></ol>
+<p>🔁 Цикл управления: план → проверка → анализ → решение → новая проверка. Если цикл оборвался на справке, контроль не сработал.</p>`]]},
+{n:'Практический',e:'🛠️',c:'#9b6bff',l:'#dccbff',t:'Как применить?',qa:[
+['Как вы, будучи завучем, согласуете план методобъединения с годовым планом школы?',`<p>Ситуация: методобъединение принесло свой план, а в годовом плане школы другая тема года. Действуем по шагам.</p>
+<ol class="steps">
+<li><span><b>Сверить цели.</b> Из какой задачи школы вытекает каждое дело МО? Дело без связи с целью убираем или переписываем.</span></li>
+<li><span><b>Наложить календари.</b> Проверить даты контрольных, открытых уроков, конкурсов и каникул, убрать наложения.</span></li>
+<li><span><b>Назначить ответственных</b> и сроки для каждого пункта.</span></li>
+<li><span><b>Обсудить и утвердить:</b> методсовет, затем директор.</span></li>
+<li><span><b>Договориться о контроле:</b> какая форма отчёта, когда посещаем уроки, когда подводим итоги.</span></li>
+<li><span><b>Сверять в течение года</b> и вносить правки.</span></li></ol>`],
+['Пример: тема года «функциональная грамотность». Как это выглядит в планах?',`<p>Цель одна для всех, а дела у каждого свои.</p>
 <div class="grid">
-<div class="card top" style="--c:var(--p)"><h3>1. Диагностика</h3><p>Честно оцениваем сильные и слабые стороны.</p></div>
-<div class="card top" style="--c:var(--o)"><h3>2. Миссия и цели</h3><p>Определяем, какой мы хотим видеть организацию.</p></div>
-<div class="card top" style="--c:var(--g)"><h3>3. Программа и проекты</h3><p>Разбиваем цель на понятные шаги.</p></div>
-<div class="card top" style="--c:var(--b)"><h3>4. Внедрение</h3><p>Обучаем педагогов, пробуем новое, поддерживаем команду.</p></div>
-<div class="card top" style="--c:var(--pk)"><h3>5. Оценка</h3><p>Смотрим на результаты учеников и качество условий.</p></div>
-<div class="card top" style="--c:var(--y)"><h3>6. Закрепление</h3><p>Удачное становится нормой и частью устава и планов.</p></div></div></section>
-
-<section id="prob"><h2><span>7</span>Типичные проблемы и как их решают</h2>
-<details open><summary>😓 Много текущих дел, на развитие не остаётся времени</summary><p>Решение: делегировать, распределять ответственность, вынести развитие в отдельные проекты со сроками.</p></details>
-<details><summary>🙅 Педагоги сопротивляются переменам</summary><p>Решение: вовлекать в обсуждение, обучать, показывать пользу на примерах и признавать успехи.</p></details>
-<details><summary>📄 Много бумаг, мало смысла</summary><p>Решение: отчёты должны отвечать на вопрос, что стало лучше для учеников.</p></details>
-<details><summary>💰 Не хватает ресурсов</summary><p>Решение: приоритеты, партнёрства, гранты и проекты, рациональное использование имеющегося.</p></details></section>
-
-<section id="end"><h2><span>8</span>Выводы</h2>
-<div class="def">Управление образовательной организацией — это умение одновременно держать порядок и двигаться вперёд.</div>
-<div class="grid">
-<div class="card"><h3>1. Две стороны</h3><p>Функционирование даёт устойчивость, развитие даёт будущее.</p></div>
-<div class="card"><h3>2. Цикл</h3><p>Анализ, планирование, организация, мотивация, контроль и регулирование повторяются постоянно.</p></div>
-<div class="card"><h3>3. Люди</h3><p>Результат создают педагоги, поэтому управление опирается на команду и участие всех сторон.</p></div>
-<div class="card"><h3>4. Результат</h3><p>Главная мера успеха — качество образования и достижения обучающихся.</p></div></div></section>
-</main><footer>Менеджмент в образовании · Контент-анализ темы</footer></body></html>
+<div class="item"><span class="ico">🧮</span><b>Математика</b><small>Задачи из жизни: бюджет, скидки, расстояния</small></div>
+<div class="item"><span class="ico">📖</span><b>Русский язык</b><small>Работа с текстом, смысловое чтение</small></div>
+<div class="item"><span class="ico">🔬</span><b>Естествознание</b><small>Опыты и задачи на объяснение явлений</small></div>
+<div class="item"><span class="ico">🎒</span><b>Классные руководители</b><small>Классные часы и проекты по теме</small></div>
+<div class="item"><span class="ico">🧑‍🏫</span><b>Методсовет</b><small>Семинар для учителей по новым заданиям</small></div>
+<div class="item"><span class="ico">🗣️</span><b>Педсовет</b><small>Заседание с итогами за полугодие</small></div></div>
+<h3>Что должно совпасть во всех планах</h3>
+<div class="grid"><div class="item"><b>🎯 Цель</b><small>одна и та же формулировка</small></div><div class="item"><b>📅 Сроки</b><small>одна сетка дат</small></div><div class="item"><b>👤 Ответственные</b><small>названы по фамилии</small></div><div class="item"><b>🔍 Контроль</b><small>одна форма отчёта</small></div></div>`]]}
+];
+const svg=document.getElementById('daisy'),panel=document.getElementById('panel');let cur=0;
+let h='';
+P.forEach((p,i)=>{const a=i*60,r=(a-90)*Math.PI/180,x=250+Math.cos(r)*160,y=250+Math.sin(r)*160;
+ h+=`<g class="petal" id="p${i}" role="button" tabindex="0" aria-label="${p.n}: ${p.t}"><g class="shape"><g transform="rotate(${a} 250 250)"><ellipse cx="250" cy="118" rx="64" ry="96" fill="${p.l}" stroke="${p.c}" stroke-width="3"/></g></g>
+ <text x="${x}" y="${y-2}" text-anchor="middle" font-size="36">${p.e}</text><text x="${x}" y="${y+22}" text-anchor="middle" font-size="12.5">${p.n}</text></g>`});
+h+=`<circle cx="250" cy="250" r="62" fill="#ffd93d" stroke="#f5a300" stroke-width="5"/><text x="250" y="246" text-anchor="middle" font-size="15" font-family="Fredoka,sans-serif" font-weight="600" fill="#2b2a33">Единство</text><text x="250" y="266" text-anchor="middle" font-size="15" font-family="Fredoka,sans-serif" font-weight="600" fill="#2b2a33">планов</text>`;
+svg.innerHTML=h;
+function show(i,scroll){cur=i;const p=P[i];
+ document.querySelectorAll('.petal').forEach((e,j)=>e.classList.toggle('on',j===i));
+ panel.style.setProperty('--c',p.c);
+ panel.innerHTML=`<span class="tag">${p.e} Лепесток ${i+1} из 6: ${p.n}</span><h2>${p.t}</h2>`+
+ p.qa.map(q=>`<details open><summary>${q[0]}</summary><div class="ans">${q[1]}</div></details>`).join('')+
+ `<div class="nav"><button class="btn" id="pv">← Предыдущий</button><button class="btn" id="nx">Следующий →</button></div>`;
+ document.getElementById('pv').onclick=()=>show((cur+5)%6,1);
+ document.getElementById('nx').onclick=()=>show((cur+1)%6,1);
+ if(scroll&&innerWidth<=900)panel.scrollIntoView({behavior:'smooth',block:'start'});}
+P.forEach((p,i)=>{const e=document.getElementById('p'+i);
+ e.onclick=()=>show(i,1);e.onkeydown=ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();show(i,1)}}});
+show(0,0);
+</script>
+</body>
+</html>
